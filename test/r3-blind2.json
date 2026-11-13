@@ -1,0 +1,22 @@
+[
+{"id":"Z-01","lang":"en","question":"What is the part number of the module lift trolley?","expect":"refuse","steps":[]},
+{"id":"Z-02","lang":"en","question":"How much current can breaker Q1 handle?","expect":"refuse","steps":[]},
+{"id":"Z-03","lang":"en","question":"Where can I download the change record CHG-DEMO-0042?","expect":"refuse","steps":[]},
+{"id":"Z-04","lang":"en","question":"Which brand of insulated gloves is approved?","expect":"refuse","steps":[]},
+{"id":"Z-05","lang":"en","question":"How do I discharge the DC bus before inspection?","expect":"refuse","steps":[]},
+{"id":"Z-06","lang":"en","question":"What colour is the danger tag?","expect":"refuse","steps":[]},
+{"id":"Z-07","lang":"en","question":"Does the customer notice need a signature?","expect":"refuse","steps":[]},
+{"id":"Z-08","lang":"en","question":"What is the replacement module's firmware release date?","expect":"refuse","steps":[]},
+{"id":"Z-09","lang":"en","question":"How tight should the retaining screws of the replacement be?","expect":"answer","steps":[9]},
+{"id":"Z-10","lang":"en","question":"What do I do if the voltage reading is not near zero?","expect":"answer","steps":[13,6]},
+{"id":"Z-11","lang":"en","question":"Which breaker do I close after removing my lock?","expect":"answer","steps":[10]},
+{"id":"Z-12","lang":"en","question":"What exactly should I look at on the display before starting?","expect":"answer","steps":[2]},
+{"id":"Z-13","lang":"en","question":"Who has to be present when the module is taken out?","expect":"answer","steps":[7]},
+{"id":"Z-14","lang":"en","question":"How do I wire the new module to the busbar?","expect":"refuse","steps":[]},
+{"id":"Z-15","lang":"en","question":"What is the maximum weight the trolley supports?","expect":"refuse","steps":[]},
+{"id":"Z-16","lang":"en","question":"Is there a spare lock in the cabinet?","expect":"refuse","steps":[]},
+{"id":"Z-17","lang":"fr","question":"Quel est le poids maximal supporté par le chariot ?","expect":"refuse","steps":[]},
+{"id":"Z-18","lang":"fr","question":"Comment câbler le nouveau module sur les barres ?","expect":"refuse","steps":[]},
+{"id":"Z-19","lang":"fr","question":"Que doit afficher le panneau après l’isolement du module 3 ?","expect":"answer","steps":[4]},
+{"id":"Z-20","lang":"fr","question":"Quelle est la marque des gants isolants ?","expect":"refuse","steps":[]}
+]

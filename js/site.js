@@ -1,0 +1,1 @@
+/* OPSIGNE site - intentionally empty. The scroll-reveal observer was removed in the skills trial (docs/SKILLS-TRIAL.md); the file stays only because test/security.test.js reads it. Not in the bundle. */

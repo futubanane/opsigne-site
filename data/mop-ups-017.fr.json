@@ -1,0 +1,121 @@
+{
+ "id": "MOP-UPS-017",
+ "version": "1.0",
+ "title": "Remplacement d’un module UPS (fictif) : remplacer le module de puissance 3 de l’UPS-B2",
+ "author": "A. Example",
+ "assets": [
+  "UPS-B2"
+ ],
+ "synthetic": true,
+ "steps": [
+  {
+   "n": 1,
+   "title": "Confirmer la fenêtre d’intervention",
+   "text": "Confirmer que la demande de changement CHG-DEMO-0042 est approuvée et que l’avis client pour la fenêtre a été envoyé. Ne pas démarrer en dehors de la fenêtre approuvée."
+  },
+  {
+   "n": 2,
+   "title": "Vérifier la marge de charge",
+   "hold": true,
+   "text": "Sur l’afficheur de l’UPS-B2, lire la charge de sortie totale. Les modules restants doivent pouvoir porter la charge sans le module 3. Ne poursuivre que si la charge totale est dans la limite.",
+   "reading": {
+    "label": "Charge de sortie totale de l’UPS-B2",
+    "unit": "%",
+    "min": 0,
+    "max": 65
+   },
+   "on_fail": 13
+  },
+  {
+   "n": 3,
+   "title": "Enfiler les EPI contre l’arc électrique",
+   "text": "Enfiler les EPI contre l’arc électrique adaptés à la catégorie indiquée sur l’étiquette de l’armoire, les gants isolants et l’écran facial avant d’ouvrir toute porte d’armoire de l’UPS-B2.",
+   "warning": "DANGER D’ARC ÉLECTRIQUE : ne pas ouvrir la porte de l’armoire sans les EPI adaptés. Ne pas travailler seul dans l’armoire."
+  },
+  {
+   "n": 4,
+   "title": "Isoler le module 3 depuis le panneau de commande",
+   "text": "Au panneau de commande de l’UPS-B2, sélectionner le module 3 et choisir Isoler. Vérifier que le panneau affiche le module 3 comme ISOLÉ et que les modules 1, 2 et 4 restent EN LIGNE."
+  },
+  {
+   "n": 5,
+   "title": "Verrouillage et étiquetage (consignation) du disjoncteur de sortie du module 3",
+   "verify2": true,
+   "text": "Ouvrir le disjoncteur de sortie Q3 du module 3. Poser votre cadenas personnel et votre étiquette de danger sur Q3. Une seconde personne doit vérifier de façon indépendante que le cadenas et l’étiquette sont sur Q3 et que la manette du disjoncteur ne peut pas être bougée.",
+   "warning": "LE VERROUILLAGE EST OBLIGATOIRE. Ne jamais retirer ni contourner le cadenas d’une autre personne. Ne jamais sauter le verrouillage."
+  },
+  {
+   "n": 6,
+   "title": "Prouver l’absence de tension",
+   "hold": true,
+   "text": "Avec un testeur de tension adapté, tester les bornes de sortie du module 3 entre phases et entre phase et terre. Tester le testeur sur une source sous tension connue avant et après. La valeur lue doit être proche de zéro avant tout travail sur le module.",
+   "reading": {
+    "label": "Tension aux bornes de sortie du module 3",
+    "unit": "V CA",
+    "min": 0,
+    "max": 5
+   },
+   "on_fail": 13
+  },
+  {
+   "n": 7,
+   "title": "Retirer le module 3",
+   "text": "Desserrer les deux vis de maintien avant et faire glisser le module 3 sur le chariot élévateur de modules. Le module pèse environ 85 kg : utiliser le chariot et deux personnes. Ne pas le soulever à la main."
+  },
+  {
+   "n": 8,
+   "title": "Inspecter le connecteur du fond de panier",
+   "text": "Inspecter le connecteur du fond de panier de l’emplacement vide : broches tordues, traces de brûlure ou débris. En cas de dommage, s’arrêter et passer à l’étape de repli."
+  },
+  {
+   "n": 9,
+   "title": "Insérer le module de remplacement",
+   "text": "Vérifier que la référence et l’étiquette de firmware du module de remplacement correspondent à celles du module retiré. Faire glisser le module de remplacement dans l’emplacement 3 et serrer les deux vis de maintien à 5 Nm."
+  },
+  {
+   "n": 10,
+   "title": "Retirer le cadenas et fermer le disjoncteur d’entrée",
+   "text": "Retirer votre propre cadenas et votre étiquette de Q3. Fermer le disjoncteur d’entrée Q1 du module 3 et attendre 120 secondes la précharge. Lire ensuite la tension du bus continu du module 3.",
+   "hold": true,
+   "reading": {
+    "label": "Tension du bus continu du module 3",
+    "unit": "V CC",
+    "min": 390,
+    "max": 410
+   },
+   "on_fail": 13
+  },
+  {
+   "n": 11,
+   "title": "Mettre le module 3 en ligne et vérifier la sortie",
+   "hold": true,
+   "text": "Au panneau de commande, sélectionner le module 3 et choisir En ligne. Une fois que le module indique EN LIGNE, lire la tension de sortie du module 3.",
+   "reading": {
+    "label": "Tension de sortie du module 3",
+    "unit": "V CA",
+    "min": 396,
+    "max": 404
+   },
+   "on_fail": 13
+  },
+  {
+   "n": 12,
+   "title": "Vérifier le partage de charge et clôturer",
+   "hold": true,
+   "text": "Comparer la charge du module 3 à celle des modules 1, 2 et 4. Noter l’écart. Ne clôturer la demande de changement CHG-DEMO-0042 qu’une fois le partage de charge dans les limites.",
+   "reading": {
+    "label": "Écart de charge du module 3 par rapport à la moyenne",
+    "unit": "%",
+    "min": -5,
+    "max": 5
+   },
+   "on_fail": 13
+  },
+  {
+   "n": 13,
+   "title": "REPLI : revenir à la configuration d’origine",
+   "rollback": true,
+   "text": "Arrêter le travail. Sélectionner le module 3 et choisir Isoler. Ouvrir les disjoncteurs Q1 et Q3 et reposer votre cadenas et votre étiquette. Réinstaller le module 3 d’origine s’il a été retiré. Remettre le module 3 dans son état précédent et prévenir le chef de quart avant toute autre action."
+  }
+ ]
+}

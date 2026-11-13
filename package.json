@@ -1,0 +1,10 @@
+{
+  "name": "opsigne-site",
+  "private": true,
+  "description": "OPSIGNE site (round 2): static FR/EN pages + client-side interactive demo. No runtime dependencies.",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build": "python3 tools/make_fr.py && python3 tools/build_data.py && python3 _build_pages.py && python3 logo/_build.py",
+    "contrast": "python3 tools/contrast.py"
+  }
+}

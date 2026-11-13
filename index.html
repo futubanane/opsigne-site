@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>OPSIGNE - Exécuter les procédures approuvées, et pouvoir le montrer</title>
+<meta name="description" content="OPSIGNE guide les techniciens datacenter pas à pas dans les procédures approuvées, consigne chaque étape critique dans un journal à preuve d’altération.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F7F2E9">
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="logo/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="logo/png/apple-touch-icon-180.png">
+<link rel="stylesheet" href="css/site.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="OPSIGNE"><img src="logo/lockup-light.svg" width="144" height="32" alt="OPSIGNE"></a>
+<nav class="nav" aria-label="Navigation principale"><a class="sec" href="#fonctionnement">Fonctionnement</a><a class="sec" href="#demo">Démo</a><a class="sec" href="#limites">Limites de sécurité</a><a class="sec" href="#partenaires">Partenaires de conception</a><a class="lang" href="en/index.html" hreflang="en" lang="en" title="English version">EN</a><a class="btn" href="mailto:bonjour@opsigne.example?subject=OPSIGNE%20-%20Parlons-en">Parlons-en</a></nav>
+</div>
+</header>
+<main id="main">
+
+<section class="hero" aria-labelledby="h-hero">
+<div class="wrap">
+<p class="eyebrow">Procédures d’exploitation de datacenter</p>
+<h1 id="h-hero">Une procédure approuvée ne vaut que si l’on peut montrer qu’elle a été suivie, étape par étape.</h1>
+<p class="lead">OPSIGNE guide les techniciens pas à pas dans vos procédures approuvées (MOP, SOP, EOP), consigne chaque étape critique dans un journal dont toute modification se détecte, et ne répond qu’à partir de vos documents approuvés.</p>
+<div class="row"><a class="btn" href="mailto:bonjour@opsigne.example?subject=OPSIGNE%20-%20Parlons-en">Parlons-en</a><a class="btn ghost" href="#demo">Essayer la démo</a></div>
+<figure class="vis band" role="img" aria-label="Illustration fictive : une étape avec point d’arrêt, un relevé de 70 % pour un maximum de 65 % qui déclenche l’arrêt, et trois événements chaînés dont le troisième est rompu."><div aria-hidden="true">
+<div class="band-top"><span class="vis-ctx">MOP-UPS-017 v1.0 · étape 2 sur 12</span><span class="vis-title"><span class="tag tag-hold">Point d’arrêt</span> Vérifier la marge de charge</span><span class="vis-fict">Données fictives</span></div>
+<p class="vis-ctx band-log">Journal</p>
+<div class="band-chain"><span class="blk">#1<code>a3f9&hellip;</code></span><span class="band-link"><span class="wire"></span><span class="lnk ok">lié</span><span class="wire"></span></span><span class="blk">#2<code>7c1e&hellip;</code></span><span class="band-link"><span class="wire bad"></span><span class="lnk bad">rompu</span><span class="wire bad"></span></span><span class="blk bad">#3<code>51d0&hellip;</code></span></div>
+<p class="band-stop"><strong>&#10006; ARRÊT - hors plage</strong><span>Charge de sortie totale 70 % &middot; max 65 % &rarr; Repli : étape 13</span></p>
+</div></figure>
+</div>
+</section>
+
+<section class="alt" id="probleme" aria-labelledby="h-pb">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Le problème</p><h2 id="h-pb">La procédure existe. Ce qui manque, c’est la trace de ce qui s’est vraiment passé.</h2></div>
+<div class="grid g3"><article class="card" data-reveal><h3>La procédure est écrite, le geste varie</h3><p>Le MOP est dans un classeur ou un PDF. Sous la pression d’une fenêtre de maintenance, des étapes sont sautées, réordonnées ou faites de mémoire. On le découvre après l’incident, rarement avant.</p></article><article class="card" data-reveal><h3>Le savoir-faire part avec les seniors</h3><p>L’ordre réel des gestes, la valeur qui doit alerter, le piège propre à une baie : tout cela vit dans la tête de quelques personnes. Quand elles changent de poste ou partent, il ne reste que le document.</p></article><article class="card" data-reveal><h3>L’audit se prépare dans l’urgence</h3><p>Reconstituer qui a fait quoi, quand, avec quelle version du document, à partir de mails, de photos et de souvenirs, prend des jours, et le résultat reste discutable.</p></article></div>
+<p class="note">Volontairement sans chiffre : nous n’affichons aucune statistique dont nous ne pourrions pas nommer la source ici.</p>
+</div>
+</section>
+
+<section id="fonctionnement" aria-labelledby="h-how">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Comment ça marche</p><h2 id="h-how">Quatre idées, démontrées sur une procédure fictive.</h2><p>Chaque bloc ci-dessous existe aujourd’hui dans une démo de preuve, sur une procédure inventée (remplacement d’un module d’onduleur). Ce n’est pas encore un produit. Vous pouvez essayer ces idées dans la démo plus bas.</p></div>
+<div class="grid g2"><article class="card" data-reveal><span class="num" aria-hidden="true">01</span><h3>Exécution guidée, avec points d’arrêt</h3><p>Le technicien voit une étape à la fois. Aux points d’arrêt, il doit saisir la valeur relevée : hors tolérance, l’étape de repli prévue par la procédure s’affiche. Une seconde personne peut être exigée pour vérifier. Tout écart est consigné avec sa raison.</p><p class="sample">Exemple fictif : relevé 70 % pour un maximum de 65 % - arrêt, retour à l’étape de repli.</p></article><article class="card" data-reveal><span class="num" aria-hidden="true">02</span><h3>Un journal dont toute modification se détecte</h3><p>Chaque étape critique devient un événement relié au précédent par une empreinte SHA-256. Modifier un événement passé casse la chaîne, et la vérification le montre. Ce n’est pas un coffre-fort inviolable : c’est un journal qui rend l’altération visible.</p><p class="sample">Exemple fictif : un relevé modifié après coup -&gt; vérification : chaîne rompue à l’événement 7.</p></article><article class="card" data-reveal><span class="num" aria-hidden="true">03</span><h3>Des réponses uniquement issues de vos documents approuvés</h3><p>Une question posée en cours d’intervention reçoit en réponse le texte de l’étape approuvée, avec l’identifiant, la version et le numéro d’étape. Si rien dans les documents approuvés ne répond, OPSIGNE refuse de répondre au lieu de deviner.</p><p class="sample">Exemple fictif : « Quelle est la pression des pneus du chariot ? » -&gt; « Non couvert par vos procédures approuvées, escaladez au chef de quart. »</p></article><article class="card" data-reveal><span class="num" aria-hidden="true">04</span><h3>Un rapport d’audit exportable</h3><p>Pour chaque exécution : qui, quand, quelle version de la procédure, quelles valeurs relevées, quels écarts, plus l’empreinte de tête de la chaîne, à conserver ailleurs si vous le souhaitez. Export JSON et HTML. Le rapport aide à produire des preuves ; il ne remplace ni votre auditeur ni votre jugement.</p><p class="sample">Exemple fictif : RUN-0001, 13 étapes, 1 écart, empreinte de tête affichée.</p></article></div>
+</div>
+</section>
+
+<section class="alt" id="demo" aria-labelledby="h-demo">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Démo interactive</p><h2 id="h-demo">Essayez une intervention fictive, sans rien installer.</h2></div>
+<div class="demo" id="demo-app">
+<noscript><p class="demo-nojs">Cette démo a besoin de JavaScript. Le reste de la page fonctionne sans.</p></noscript>
+<p class="demo-disc"><strong>Démo à données fictives. Ce n’est pas un système de sécurité.</strong></p>
+<p class="demo-lead">Tout se passe dans votre navigateur : aucun serveur, réseau ni cookie, rien n’est conservé. La procédure est inventée.</p>
+<p class="demo-proc"><span class="mono">Procédure fictive</span> <strong>MOP-UPS-017 v1.0</strong> - Remplacement d’un module UPS (fictif) : remplacer le module de puissance 3 de l’UPS-B2</p>
+<div class="demo-grid">
+<section class="pane pane-exec" aria-labelledby="d-exec">
+<h3 id="d-exec"><span class="pn" aria-hidden="true">1</span>Exécution guidée</h3>
+<form id="start-form" class="stack" novalidate>
+<label for="op-name">Nom de l’opérateur (fictif)</label>
+<input id="op-name" name="op" type="text" maxlength="100" autocomplete="off" aria-describedby="op-hint start-msg">
+<p class="hint" id="op-hint">Tapez un nom inventé, par exemple « A. Exemple ». Il reste dans cet onglet.</p>
+<button class="btn" type="submit">Démarrer l’exécution</button>
+<p class="msg" id="start-msg" role="alert"></p>
+</form>
+<div id="run-area" hidden>
+<div class="progress"><p class="prog-text" id="prog-text"></p><div class="prog" id="prog" aria-hidden="true"></div></div>
+<div id="step-area"></div>
+</div>
+</section>
+<section class="pane pane-log" aria-labelledby="d-log">
+<h3 id="d-log"><span class="pn" aria-hidden="true">2</span>Journal à preuve d’altération</h3>
+<p class="intro">Chaque action ajoute un événement dont l’empreinte SHA-256 inclut la précédente.</p>
+<dl class="kv"><div><dt>Événements</dt><dd id="count">0</dd></div><div><dt>Empreinte de tête</dt><dd><code id="head">-</code></dd></div><div><dt>Moteur de hachage</dt><dd id="engine">-</dd></div></dl>
+<p class="hint log-hid" id="log-hid" hidden></p>
+<div class="chain-box" id="chain-box" role="region" aria-label="Journal des événements (zone défilante)" tabindex="0"><p class="hint" id="chain-empty"></p><ol class="chain" id="chain"></ol></div>
+<div class="log-foot"><p class="hint" id="shown"></p><button class="linkbtn" type="button" id="log-toggle" aria-expanded="false" aria-controls="chain" hidden></button></div>
+<div class="actions"><button class="btn" type="button" id="btn-verify" disabled>Vérifier le journal</button><button class="btn warn" type="button" id="btn-tamper" disabled aria-describedby="tamper-hint">Simuler une altération</button><button class="btn ghost" type="button" id="btn-reset">Réinitialiser</button></div>
+<p class="hint" id="tamper-hint">Simulation : modifie un événement passé sans recalculer les empreintes.</p>
+<p class="msg sim-msg" id="tamper-out"></p>
+<div class="verify v-none" id="verify-out" role="status" tabindex="-1"></div>
+</section>
+<section class="pane pane-ask" aria-labelledby="d-ask">
+<h3 id="d-ask"><span class="pn" aria-hidden="true">3</span>Poser une question</h3>
+<p>Réponses citées (identifiant, version, étape). Posez votre question en français.</p>
+<form id="qa-form" class="stack" novalidate><label for="qa-in">Votre question</label><div class="qrow"><input id="qa-in" type="text" maxlength="500" autocomplete="off" aria-describedby="ask-note"><button class="btn" type="submit">Demander</button></div><p class="hint ask-note" id="ask-note">Réponses limitées aux étapes approuvées ; en cas de doute, la demande est refusée.</p></form>
+<div class="chips" role="group" aria-label="Essayez :"><span class="mono">Essayez :</span><button class="chip" type="button" data-q="Quel équipement de protection est requis ?">Quel équipement de protection est requis ?</button><button class="chip" type="button" data-q="Comment fait-on le repli ?">Comment fait-on le repli ?</button><button class="chip" type="button" data-q="Quelle est la pression des pneus du chariot ?">Quelle est la pression des pneus du chariot ?</button><button class="chip" type="button" data-q="Puis-je sauter le verrouillage pour gagner du temps ?">Puis-je sauter le verrouillage pour gagner du temps ?</button></div>
+<div id="qa-out" class="qa-out"></div>
+</section>
+<section class="pane pane-rep" aria-labelledby="d-rep">
+<h3 id="d-rep"><span class="pn" aria-hidden="true">4</span>Rapport</h3>
+<p class="intro">HTML autonome ou JSON brut, avec l’empreinte de tête.</p>
+<div class="actions"><button class="btn" type="button" id="rep-html" disabled>Télécharger le rapport (HTML)</button><button class="btn ghost" type="button" id="rep-json" disabled>Télécharger le rapport (JSON)</button></div>
+<p class="hint" id="rep-note"></p>
+</section>
+</div>
+<div class="sr-only" id="live" aria-live="polite" role="status"></div>
+<p class="demo-disc demo-disc-foot">Démo à données fictives. Ce n’est pas un système de sécurité.</p>
+</div>
+</div>
+</section>
+
+<section class="safety" id="limites" aria-labelledby="h-safe">
+<div class="wrap">
+<p class="eyebrow">Limite de sécurité</p>
+<h2 id="h-safe">OPSIGNE ne pilote jamais d’équipement, n’invente jamais d’étape. La procédure approuvée reste toujours l’autorité.</h2>
+<ul><li><strong>Aucune connexion aux équipements</strong><span>OPSIGNE n’envoie aucune commande et ne lit aucun automate. Les valeurs sont saisies par la personne sur place.</span></li><li><strong>Aucune étape inventée</strong><span>Les réponses reprennent le texte approuvé. Pas de génération libre, pas de reformulation qui changerait le sens.</span></li><li><strong>En cas de doute, la procédure gagne</strong><span>Si l’outil et le document approuvé semblent diverger, on suit le document approuvé et on appelle le responsable d’astreinte.</span></li><li><strong>Pas un système de sécurité</strong><span>OPSIGNE ne remplace ni les consignes de sécurité du site, ni les verrouillages, ni le jugement des personnes habilitées.</span></li></ul>
+</div>
+</section>
+
+<section id="pour-qui" aria-labelledby="h-who">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Pour qui</p><h2 id="h-who">Pour les équipes qui exploitent les salles.</h2><p>Opérateurs de colocation et de cloud souverain de taille intermédiaire, en Europe.</p></div>
+<ul class="who"><li data-reveal><h3>Responsables d’exploitation</h3><p>Vous voulez que la procédure approuvée soit celle qui est exécutée, sur tous les quarts, y compris quand le senior est absent.</p></li><li data-reveal><h3>Chefs d’équipe et de quart</h3><p>Vous briefez, vous supervisez, vous signez. Vous voulez un déroulé clair pour le technicien et une trace que vous n’avez pas à recopier.</p></li><li data-reveal><h3>Responsables conformité et audit interne</h3><p>Vous devez montrer comment une intervention s’est déroulée. Vous voulez des éléments de preuve datés et vérifiables, pas des souvenirs.</p></li></ul>
+</div>
+</section>
+
+<section class="alt" id="partenaires" aria-labelledby="h-pt">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Où nous en sommes</p><h2 id="h-pt">Phase de démarrage : nous cherchons des partenaires de conception.</h2><p>Soyons clairs : OPSIGNE n’a pas de clients. Il existe une démo de preuve, sur des données fictives, qui montre les quatre idées ci-dessus. Avant d’aller plus loin, nous voulons comprendre comment vos procédures sont réellement écrites, exécutées et auditées.</p></div>
+<div class="lists">
+<div class="card"><h3>Ce que nous cherchons</h3><ul><li>Quelques conversations avec des personnes d’exploitation, de quart ou de conformité.</li><li>Un à trois partenaires de conception, prêts à regarder un prototype et à dire ce qui ne tient pas.</li><li>Des retours francs, y compris « ce n’est pas pour nous ».</li></ul></div>
+<div class="card"><h3>Ce que nous ne faisons pas</h3><ul><li>Pas de démarchage commercial : cette page n’affiche pas de prix et ne vend rien.</li><li>Pas de promesse sur ce qu’un audit exigera de vous.</li><li>Pas de données réelles dans la démo : tout y est fictif.</li></ul></div>
+</div>
+<div class="row"><a class="btn" href="mailto:bonjour@opsigne.example?subject=OPSIGNE%20-%20Parlons-en">Parlons-en</a></div>
+</div>
+</section>
+
+</main>
+<footer>
+<div class="wrap">
+<p class="disclaimer">Démo à données fictives. Ce n’est pas un système de sécurité.</p>
+<p>OPSIGNE - prototype (round 2). Contenu provisoire, sans valeur contractuelle.</p>
+<div class="links"><a href="#fonctionnement">Fonctionnement</a><a href="#limites">Limites de sécurité</a><a href="en/index.html">English</a></div>
+</div>
+</footer>
+<script src="js/bundle.js" defer></script>
+</body>
+</html>

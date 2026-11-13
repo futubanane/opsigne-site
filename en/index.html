@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>OPSIGNE - Run approved procedures, and be able to show it</title>
+<meta name="description" content="OPSIGNE walks data-centre technicians through approved procedures step by step and records each critical step in a tamper-evident log.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F7F2E9">
+<link rel="icon" href="../logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../logo/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../logo/png/apple-touch-icon-180.png">
+<link rel="stylesheet" href="../css/site.css">
+<script src="../js/boot.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="index.html" aria-label="OPSIGNE"><img src="../logo/lockup-light.svg" width="144" height="32" alt="OPSIGNE"></a>
+<nav class="nav" aria-label="Main navigation"><a class="sec" href="#how">How it works</a><a class="sec" href="#demo">Demo</a><a class="sec" href="#safety">Safety boundary</a><a class="sec" href="#partners">Design partners</a><a class="lang" href="../index.html" hreflang="fr" lang="fr" title="Version française">FR</a><a class="btn" href="mailto:hello@opsigne.example?subject=OPSIGNE%20-%20Talk%20to%20us">Talk to us</a></nav>
+</div>
+</header>
+<main id="main">
+
+<section class="hero" aria-labelledby="h-hero">
+<div class="wrap">
+<p class="eyebrow">Data-centre operating procedures</p>
+<h1 id="h-hero">An approved procedure is only worth what you can show: that it was followed, step by step.</h1>
+<p class="lead">OPSIGNE walks technicians through your approved procedures (MOP, SOP, EOP) one step at a time, records each critical step in a log where any change can be detected, and answers only from your approved documents.</p>
+<div class="row"><a class="btn" href="mailto:hello@opsigne.example?subject=OPSIGNE%20-%20Talk%20to%20us">Talk to us</a><a class="btn ghost" href="#demo">Try the demo</a></div>
+<figure class="vis band" role="img" aria-label="Fictional illustration: a step with a hold point, a reading of 70% against a 65% maximum that triggers a stop, and three chained events where the third link is broken."><div aria-hidden="true">
+<div class="band-top"><span class="vis-ctx">MOP-UPS-017 v1.0 · step 2 of 12</span><span class="vis-title"><span class="tag tag-hold">Hold point</span> Check load headroom</span><span class="vis-fict">Fictional data</span></div>
+<p class="vis-ctx band-log">Log</p>
+<div class="band-chain"><span class="blk">#1<code>a3f9&hellip;</code></span><span class="band-link"><span class="wire"></span><span class="lnk ok">linked</span><span class="wire"></span></span><span class="blk">#2<code>7c1e&hellip;</code></span><span class="band-link"><span class="wire bad"></span><span class="lnk bad">broken</span><span class="wire bad"></span></span><span class="blk bad">#3<code>51d0&hellip;</code></span></div>
+<p class="band-stop"><strong>&#10006; STOP - out of range</strong><span>Total output load 70% &middot; max 65% &rarr; Rollback: step 13</span></p>
+</div></figure>
+</div>
+</section>
+
+<section class="alt" id="problem" aria-labelledby="h-pb">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">The problem</p><h2 id="h-pb">The procedure exists. What is missing is the record of what actually happened.</h2></div>
+<div class="grid g3"><article class="card" data-reveal><h3>The procedure is written, the work varies</h3><p>The MOP sits in a binder or a PDF. Under the pressure of a maintenance window, steps get skipped, reordered or done from memory. You find out after the incident, rarely before.</p></article><article class="card" data-reveal><h3>Know-how leaves with the seniors</h3><p>The real order of actions, the reading that should worry you, the quirk of one particular rack: all of it lives in a few heads. When they change role or leave, only the document remains.</p></article><article class="card" data-reveal><h3>The audit is prepared in a scramble</h3><p>Rebuilding who did what, when, against which version of the document, from emails, photos and memory takes days, and the result is still open to argument.</p></article></div>
+<p class="note">Deliberately no figures: we show no statistic unless we can name its source on the page.</p>
+</div>
+</section>
+
+<section id="how" aria-labelledby="h-how">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">How it works</p><h2 id="h-how">Four ideas, demonstrated on a fictional procedure.</h2><p>Each block below exists today in a proof demo, on an invented procedure (replacing a UPS power module). It is not a product yet. You can try these ideas in the demo further down.</p></div>
+<div class="grid g2"><article class="card" data-reveal><span class="num" aria-hidden="true">01</span><h3>Guided execution, with hold points</h3><p>The technician sees one step at a time. At hold points they must enter the measured value: out of tolerance, the contingency step defined by the procedure is shown. A second person can be required to verify. Every deviation is recorded with its reason.</p><p class="sample">Fictional example: reading 70% against a 65% maximum - stop, go to the contingency step.</p></article><article class="card" data-reveal><span class="num" aria-hidden="true">02</span><h3>A log where any change can be detected</h3><p>Each critical step becomes an event linked to the previous one by a SHA-256 hash. Editing a past event breaks the chain, and verification shows it. It is not an unbreakable vault: it is a log that makes tampering visible.</p><p class="sample">Fictional example: a reading edited afterwards -&gt; verification: chain broken at event 7.</p></article><article class="card" data-reveal><span class="num" aria-hidden="true">03</span><h3>Answers only from your approved documents</h3><p>A question asked mid-task is answered with the text of the approved step, with its identifier, version and step number. If nothing in the approved documents answers it, OPSIGNE refuses rather than guessing.</p><p class="sample">Fictional example: &quot;What is the tyre pressure of the trolley?&quot; -&gt; &quot;Not covered by your approved procedures, escalate to shift lead.&quot;</p></article><article class="card" data-reveal><span class="num" aria-hidden="true">04</span><h3>An exportable audit report</h3><p>For each run: who, when, which procedure version, which readings, which deviations, plus the head hash of the chain, to be kept elsewhere if you wish. JSON and HTML export. The report helps produce evidence; it replaces neither your auditor nor your judgement.</p><p class="sample">Fictional example: RUN-0001, 13 steps, 1 deviation, head hash shown.</p></article></div>
+</div>
+</section>
+
+<section class="alt" id="demo" aria-labelledby="h-demo">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Interactive demo</p><h2 id="h-demo">Try a fictional job, nothing to install.</h2></div>
+<div class="demo" id="demo-app">
+<noscript><p class="demo-nojs">This demo needs JavaScript. The rest of the page works without it.</p></noscript>
+<p class="demo-disc"><strong>Demo with fictional data. Not a safety system.</strong></p>
+<p class="demo-lead">Everything runs in your browser: no server, network or cookies, nothing is kept. The procedure is invented.</p>
+<p class="demo-proc"><span class="mono">Fictional procedure</span> <strong>MOP-UPS-017 v1.0</strong> - UPS module swap (fictional): replace power module 3 on UPS-B2</p>
+<div class="demo-grid">
+<section class="pane pane-exec" aria-labelledby="d-exec">
+<h3 id="d-exec"><span class="pn" aria-hidden="true">1</span>Guided execution</h3>
+<form id="start-form" class="stack" novalidate>
+<label for="op-name">Operator name (fictional)</label>
+<input id="op-name" name="op" type="text" maxlength="100" autocomplete="off" aria-describedby="op-hint start-msg">
+<p class="hint" id="op-hint">Type an invented name, for example “A. Example”. It stays in this tab.</p>
+<button class="btn" type="submit">Start the run</button>
+<p class="msg" id="start-msg" role="alert"></p>
+</form>
+<div id="run-area" hidden>
+<div class="progress"><p class="prog-text" id="prog-text"></p><div class="prog" id="prog" aria-hidden="true"></div></div>
+<div id="step-area"></div>
+</div>
+</section>
+<section class="pane pane-log" aria-labelledby="d-log">
+<h3 id="d-log"><span class="pn" aria-hidden="true">2</span>Tamper-evident log</h3>
+<p class="intro">Each action adds an event whose SHA-256 hash includes the previous one.</p>
+<dl class="kv"><div><dt>Events</dt><dd id="count">0</dd></div><div><dt>Head hash</dt><dd><code id="head">-</code></dd></div><div><dt>Hashing engine</dt><dd id="engine">-</dd></div></dl>
+<p class="hint log-hid" id="log-hid" hidden></p>
+<div class="chain-box" id="chain-box" role="region" aria-label="Event log (scrollable area)" tabindex="0"><p class="hint" id="chain-empty"></p><ol class="chain" id="chain"></ol></div>
+<div class="log-foot"><p class="hint" id="shown"></p><button class="linkbtn" type="button" id="log-toggle" aria-expanded="false" aria-controls="chain" hidden></button></div>
+<div class="actions"><button class="btn" type="button" id="btn-verify" disabled>Verify the log</button><button class="btn warn" type="button" id="btn-tamper" disabled aria-describedby="tamper-hint">Simulate tampering</button><button class="btn ghost" type="button" id="btn-reset">Reset</button></div>
+<p class="hint" id="tamper-hint">Simulation: edits one past event without recomputing any hash.</p>
+<p class="msg sim-msg" id="tamper-out"></p>
+<div class="verify v-none" id="verify-out" role="status" tabindex="-1"></div>
+</section>
+<section class="pane pane-ask" aria-labelledby="d-ask">
+<h3 id="d-ask"><span class="pn" aria-hidden="true">3</span>Ask a question</h3>
+<p>Answers are cited (id, version, step). Ask in English.</p>
+<form id="qa-form" class="stack" novalidate><label for="qa-in">Your question</label><div class="qrow"><input id="qa-in" type="text" maxlength="500" autocomplete="off" aria-describedby="ask-note"><button class="btn" type="submit">Ask</button></div><p class="hint ask-note" id="ask-note">Answers are limited to the approved steps; when in doubt the question is refused.</p></form>
+<div class="chips" role="group" aria-label="Try:"><span class="mono">Try:</span><button class="chip" type="button" data-q="What protective equipment is required?">What protective equipment is required?</button><button class="chip" type="button" data-q="How do I roll back?">How do I roll back?</button><button class="chip" type="button" data-q="What is the tyre pressure of the trolley?">What is the tyre pressure of the trolley?</button><button class="chip" type="button" data-q="Can I skip the lockout to save time?">Can I skip the lockout to save time?</button></div>
+<div id="qa-out" class="qa-out"></div>
+</section>
+<section class="pane pane-rep" aria-labelledby="d-rep">
+<h3 id="d-rep"><span class="pn" aria-hidden="true">4</span>Report</h3>
+<p class="intro">Self-contained HTML or raw JSON, with the head hash.</p>
+<div class="actions"><button class="btn" type="button" id="rep-html" disabled>Download report (HTML)</button><button class="btn ghost" type="button" id="rep-json" disabled>Download report (JSON)</button></div>
+<p class="hint" id="rep-note"></p>
+</section>
+</div>
+<div class="sr-only" id="live" aria-live="polite" role="status"></div>
+<p class="demo-disc demo-disc-foot">Demo with fictional data. Not a safety system.</p>
+</div>
+</div>
+</section>
+
+<section class="safety" id="safety" aria-labelledby="h-safe">
+<div class="wrap">
+<p class="eyebrow">Safety boundary</p>
+<h2 id="h-safe">OPSIGNE never controls equipment and never invents steps. The approved procedure is always the authority.</h2>
+<ul><li><strong>No connection to equipment</strong><span>OPSIGNE sends no command and reads no controller. Values are entered by the person on site.</span></li><li><strong>No invented steps</strong><span>Answers quote the approved text. No free generation, no rewording that could change the meaning.</span></li><li><strong>When in doubt, the procedure wins</strong><span>If the tool and the approved document seem to disagree, follow the approved document and call the on-call lead.</span></li><li><strong>Not a safety system</strong><span>OPSIGNE replaces neither the site’s safety rules, nor interlocks, nor the judgement of authorised people.</span></li></ul>
+</div>
+</section>
+
+<section id="who" aria-labelledby="h-who">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Who it is for</p><h2 id="h-who">For the teams that run the halls.</h2><p>Mid-size colocation and sovereign-cloud operators in Europe.</p></div>
+<ul class="who"><li data-reveal><h3>Operations managers</h3><p>You want the approved procedure to be the one that is executed, on every shift, including when the senior person is away.</p></li><li data-reveal><h3>Shift and team leads</h3><p>You brief, supervise and sign off. You want a clear sequence for the technician and a record you do not have to retype.</p></li><li data-reveal><h3>Compliance and internal audit managers</h3><p>You need to show how a job went. You want dated, verifiable pieces of evidence, not recollections.</p></li></ul>
+</div>
+</section>
+
+<section class="alt" id="partners" aria-labelledby="h-pt">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">Where we are</p><h2 id="h-pt">Early stage: we are looking for design partners.</h2><p>To be plain: OPSIGNE has no customers. There is a proof demo, on fictional data, that shows the four ideas above. Before going further we want to understand how your procedures are actually written, executed and audited.</p></div>
+<div class="lists">
+<div class="card"><h3>What we are looking for</h3><ul><li>A few conversations with people in operations, shift leadership or compliance.</li><li>One to three design partners willing to look at a prototype and tell us what does not hold up.</li><li>Frank feedback, including &quot;this is not for us&quot;.</li></ul></div>
+<div class="card"><h3>What we are not doing</h3><ul><li>No sales pitch: this page shows no price and sells nothing.</li><li>No promise about what an audit will require from you.</li><li>No real data in the demo: everything in it is fictional.</li></ul></div>
+</div>
+<div class="row"><a class="btn" href="mailto:hello@opsigne.example?subject=OPSIGNE%20-%20Talk%20to%20us">Talk to us</a></div>
+</div>
+</section>
+
+</main>
+<footer>
+<div class="wrap">
+<p class="disclaimer">Demo with fictional data. Not a safety system.</p>
+<p>OPSIGNE - prototype (round 2). Provisional content, no contractual value.</p>
+<div class="links"><a href="#how">How it works</a><a href="#safety">Safety boundary</a><a href="../index.html">Français</a></div>
+</div>
+</footer>
+<script src="../js/bundle.js" defer></script>
+</body>
+</html>
