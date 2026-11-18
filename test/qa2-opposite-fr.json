@@ -1,0 +1,349 @@
+[
+ {
+  "id": "OPV-FR-01",
+  "lang": "fr",
+  "question": "Quand retire-t-on son cadenas ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-02",
+  "lang": "fr",
+  "question": "Quand est-ce qu'on enlève le cadenas ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-03",
+  "lang": "fr",
+  "question": "À quel moment dois-je ôter mon cadenas ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-04",
+  "lang": "fr",
+  "question": "Quand est-ce que je pose mon cadenas ?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-FR-05",
+  "lang": "fr",
+  "question": "À quelle étape on met le cadenas ?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-FR-06",
+  "lang": "fr",
+  "question": "Quand est-ce qu'on appose l'étiquette de danger ?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-FR-07",
+  "lang": "fr",
+  "question": "Quand retire-t-on l'étiquette de danger ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-08",
+  "lang": "fr",
+  "question": "Tu retires ton cadenas à quel moment ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-09",
+  "lang": "fr",
+  "question": "Vous posez le cadenas à quelle étape ?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-FR-10",
+  "lang": "fr",
+  "question": "Quand est-ce qu'on dépose le cadenas et l'étiquette ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-11",
+  "lang": "fr",
+  "question": "Comment ouvre-t-on le disjoncteur Q3 ?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-FR-12",
+  "lang": "fr",
+  "question": "Quand ferme-t-on le disjoncteur Q1 ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-13",
+  "lang": "fr",
+  "question": "Quand faut-il fermer le disjoncteur d'entrée ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-14",
+  "lang": "fr",
+  "question": "Quand ouvre-t-on les disjoncteurs Q1 et Q3 ?",
+  "expect": "answer",
+  "steps": [
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-FR-15",
+  "lang": "fr",
+  "question": "Comment isole-t-on le module 3 ?",
+  "expect": "answer",
+  "steps": [
+   4,
+   13
+  ],
+  "opposite": [
+   11
+  ]
+ },
+ {
+  "id": "OPV-FR-16",
+  "lang": "fr",
+  "question": "Comment remet-on le module en ligne ?",
+  "expect": "answer",
+  "steps": [
+   11
+  ],
+  "opposite": [
+   4,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-17",
+  "lang": "fr",
+  "question": "Quand passe-t-on le module en ligne ?",
+  "expect": "answer",
+  "steps": [
+   11
+  ],
+  "opposite": [
+   4,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-18",
+  "lang": "fr",
+  "question": "Que faut-il faire pour isoler le module sur le panneau ?",
+  "expect": "answer",
+  "steps": [
+   4,
+   13
+  ],
+  "opposite": [
+   11
+  ]
+ },
+ {
+  "id": "OPV-FR-19",
+  "lang": "fr",
+  "question": "Comment desserre-t-on les vis de maintien ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9
+  ]
+ },
+ {
+  "id": "OPV-FR-20",
+  "lang": "fr",
+  "question": "A quel couple serre-t-on les vis ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ],
+  "opposite": [
+   7
+  ]
+ },
+ {
+  "id": "OPV-FR-21",
+  "lang": "fr",
+  "question": "Quand dois-je desserrer les vis ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9
+  ]
+ },
+ {
+  "id": "OPV-FR-22",
+  "lang": "fr",
+  "question": "Comment installe-t-on le module de remplacement ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ],
+  "opposite": [
+   7
+  ]
+ },
+ {
+  "id": "OPV-FR-23",
+  "lang": "fr",
+  "question": "Comment retire-t-on l'ancien module ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-24",
+  "lang": "fr",
+  "question": "Comment enlève-t-on le module de l'armoire ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9,
+   13
+  ]
+ },
+ {
+  "id": "OPV-FR-25",
+  "lang": "fr",
+  "question": "Quand enfile-t-on les gants isolants ?",
+  "expect": "answer",
+  "steps": [
+   3
+  ],
+  "opposite": []
+ },
+ {
+  "id": "OPV-FR-26",
+  "lang": "fr",
+  "question": "Quand enlève-t-on les gants isolants ?",
+  "expect": "refuse",
+  "steps": [],
+  "opposite": [
+   3
+  ]
+ },
+ {
+  "id": "OPV-FR-27",
+  "lang": "fr",
+  "question": "Quand retire-t-on les EPI ?",
+  "expect": "refuse",
+  "steps": [],
+  "opposite": [
+   3
+  ]
+ },
+ {
+  "id": "OPV-FR-28",
+  "lang": "fr",
+  "question": "Quand est-ce qu'on retire l'écran facial ?",
+  "expect": "refuse",
+  "steps": [],
+  "opposite": [
+   3
+  ]
+ }
+]

@@ -1,0 +1,92 @@
+[
+ {
+  "id": "FH-01",
+  "category": "in_scope_fr_fresh",
+  "question": "Que faut-il vérifier sur l’étiquette du module de remplacement ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ]
+ },
+ {
+  "id": "FH-02",
+  "category": "in_scope_fr_fresh",
+  "question": "Comment isole-t-on le module depuis l’écran de commande ?",
+  "expect": "answer",
+  "steps": [
+   4
+  ]
+ },
+ {
+  "id": "FH-03",
+  "category": "in_scope_fr_fresh",
+  "question": "Quelle plage de tension est normale à la sortie du module remis en ligne ?",
+  "expect": "answer",
+  "steps": [
+   11
+  ]
+ },
+ {
+  "id": "FH-04",
+  "category": "in_scope_fr_fresh",
+  "question": "Quelles protections faut-il avoir pour l’arc électrique ?",
+  "expect": "answer",
+  "steps": [
+   3
+  ]
+ },
+ {
+  "id": "FH-05",
+  "category": "in_scope_fr_fresh",
+  "question": "Sur quoi fait-on glisser le module retiré ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ]
+ },
+ {
+  "id": "FH-06",
+  "category": "in_scope_fr_fresh",
+  "question": "Quand retire-t-on son cadenas ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ]
+ },
+ {
+  "id": "FH-07",
+  "category": "in_scope_fr_fresh",
+  "question": "Quelle est la charge limite de l’UPS-B2 ?",
+  "expect": "answer",
+  "steps": [
+   2
+  ]
+ },
+ {
+  "id": "FH-08",
+  "category": "in_scope_fr_fresh",
+  "question": "Que doit-on faire si on voit des traces de brûlure dans l’emplacement ?",
+  "expect": "answer",
+  "steps": [
+   8
+  ]
+ },
+ {
+  "id": "FH-09",
+  "category": "in_scope_fr_fresh",
+  "question": "Quelle tension doit-on obtenir aux bornes avant de toucher au module ?",
+  "expect": "answer",
+  "steps": [
+   6
+  ]
+ },
+ {
+  "id": "FH-10",
+  "category": "in_scope_fr_fresh",
+  "question": "À quelle étape ferme-t-on le disjoncteur d’entrée Q1 ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ]
+ }
+]

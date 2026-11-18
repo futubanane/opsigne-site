@@ -1,0 +1,82 @@
+[
+ {
+  "id": "QA2-02",
+  "question": "Le client doit etre prevenu avant qu'on commence ?",
+  "expect": "answer",
+  "steps": [
+   1
+  ]
+ },
+ {
+  "id": "QA2-05",
+  "question": "Vous avez besoin de quelle tenue pour ouvrir l'armoire ?",
+  "expect": "answer",
+  "steps": [
+   3
+  ]
+ },
+ {
+  "id": "QA2-07",
+  "question": "Comment on coupe le module 3 sur le panneau ?",
+  "expect": "answer",
+  "steps": [
+   4
+  ]
+ },
+ {
+  "id": "QA2-10",
+  "question": "C'est quel disjoncteur qu'on verrouille ?",
+  "expect": "answer",
+  "steps": [
+   5
+  ]
+ },
+ {
+  "id": "QA2-12",
+  "question": "Faut-il tester le testeur lui-meme ?",
+  "expect": "answer",
+  "steps": [
+   6
+  ]
+ },
+ {
+  "id": "QA2-15",
+  "question": "Qu'est-ce qu'on regarde dans l'emplacement vide ?",
+  "expect": "answer",
+  "steps": [
+   8
+  ]
+ },
+ {
+  "id": "QA2-17",
+  "question": "Quel couple de serrage pour les vis du nouveau module ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ]
+ },
+ {
+  "id": "QA2-20",
+  "question": "Quelle mesure on prend sur le bus continu ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ]
+ },
+ {
+  "id": "QA2-22",
+  "question": "Quand est-ce qu'on peut clore la demande de changement ?",
+  "expect": "answer",
+  "steps": [
+   12
+  ]
+ },
+ {
+  "id": "QA2-24",
+  "question": "Vous reinstallez quoi quand on arrete tout ?",
+  "expect": "answer",
+  "steps": [
+   13
+  ]
+ }
+]

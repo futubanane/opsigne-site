@@ -1,0 +1,123 @@
+[
+ {
+  "id": "QA2-01",
+  "question": "Il faut quoi avant de demarrer ?",
+  "expect": "answer",
+  "steps": [
+   1
+  ]
+ },
+ {
+  "id": "QA2-03",
+  "question": "Comment je sais si les autres modules peuvent encaisser la charge ?",
+  "expect": "answer",
+  "steps": [
+   2
+  ]
+ },
+ {
+  "id": "QA2-04",
+  "question": "Tu regardes quoi sur l'afficheur avant de toucher au module ?",
+  "expect": "answer",
+  "steps": [
+   2
+  ]
+ },
+ {
+  "id": "QA2-06",
+  "question": "Les gants, ils doivent etre de quel type ?",
+  "expect": "answer",
+  "steps": [
+   3
+  ]
+ },
+ {
+  "id": "QA2-08",
+  "question": "Le panneau doit afficher quoi apres l'isolation ?",
+  "expect": "answer",
+  "steps": [
+   4
+  ]
+ },
+ {
+  "id": "QA2-09",
+  "question": "Qui doit controler que le cadenas est bien en place ?",
+  "expect": "answer",
+  "steps": [
+   5
+  ]
+ },
+ {
+  "id": "QA2-11",
+  "question": "Comment je verifie qu'il n'y a plus de tension sur le module ?",
+  "expect": "answer",
+  "steps": [
+   6
+  ]
+ },
+ {
+  "id": "QA2-13",
+  "question": "Ca pese combien le module qu'on sort ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ]
+ },
+ {
+  "id": "QA2-14",
+  "question": "Tu me rappelles comment on sort le module de l'armoire ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ]
+ },
+ {
+  "id": "QA2-16",
+  "question": "Si les broches sont tordues je fais quoi ?",
+  "expect": "answer",
+  "steps": [
+   8,
+   13
+  ]
+ },
+ {
+  "id": "QA2-18",
+  "question": "On compare quoi entre l'ancien et le nouveau module avant de le glisser ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ]
+ },
+ {
+  "id": "QA2-19",
+  "question": "Combien de temps faut-il patienter apres avoir ferme le disjoncteur d'entree ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ]
+ },
+ {
+  "id": "QA2-21",
+  "question": "Quand le module est revenu en ligne, je mesure quoi ?",
+  "expect": "answer",
+  "steps": [
+   11
+  ]
+ },
+ {
+  "id": "QA2-23",
+  "question": "Au repli, on avertit qui ?",
+  "expect": "answer",
+  "steps": [
+   13
+  ]
+ },
+ {
+  "id": "QA2-25",
+  "question": "Tu fais comment pour comparer la charge du module 3 avec les autres ?",
+  "expect": "answer",
+  "steps": [
+   12
+  ]
+ }
+]

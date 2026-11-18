@@ -1,0 +1,92 @@
+[
+ {
+  "id": "FD-01",
+  "category": "in_scope_fr_round2",
+  "question": "Quelle charge ne faut-il pas dépasser avant de démarrer ?",
+  "expect": "answer",
+  "steps": [
+   2
+  ]
+ },
+ {
+  "id": "FD-02",
+  "category": "in_scope_fr_round2",
+  "question": "Que doit-on faire avec le cadenas personnel au moment de consigner Q3 ?",
+  "expect": "answer",
+  "steps": [
+   5
+  ]
+ },
+ {
+  "id": "FD-03",
+  "category": "in_scope_fr_round2",
+  "question": "Combien de secondes de précharge faut-il laisser ?",
+  "expect": "answer",
+  "steps": [
+   10
+  ]
+ },
+ {
+  "id": "FD-04",
+  "category": "in_scope_fr_round2",
+  "question": "Quel est le poids approximatif du module ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ]
+ },
+ {
+  "id": "FD-05",
+  "category": "in_scope_fr_round2",
+  "question": "Que faut-il observer sur le fond de panier avant de monter le nouveau module ?",
+  "expect": "answer",
+  "steps": [
+   8
+  ]
+ },
+ {
+  "id": "FD-06",
+  "category": "in_scope_fr_round2",
+  "question": "Quelle tension de sortie est attendue quand le module est en ligne ?",
+  "expect": "answer",
+  "steps": [
+   11
+  ]
+ },
+ {
+  "id": "FD-07",
+  "category": "in_scope_fr_round2",
+  "question": "Avec quel appareil mesure-t-on l’absence de tension aux bornes ?",
+  "expect": "answer",
+  "steps": [
+   6
+  ]
+ },
+ {
+  "id": "FD-08",
+  "category": "in_scope_fr_round2",
+  "question": "Que doit-on prévenir quand on revient à la configuration d’origine ?",
+  "expect": "answer",
+  "steps": [
+   13
+  ]
+ },
+ {
+  "id": "FD-09",
+  "category": "in_scope_fr_round2",
+  "question": "Quelle est la valeur de serrage des vis du module neuf ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ]
+ },
+ {
+  "id": "FD-10",
+  "category": "in_scope_fr_round2",
+  "question": "Quel document de changement faut-il clôturer à la fin ?",
+  "expect": "answer",
+  "steps": [
+   12
+  ]
+ }
+]

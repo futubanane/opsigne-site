@@ -60,7 +60,7 @@
     return res(true, n, prev, null, '');
   }
 
-  function Chain(scope) { this.scope = scope; this.events = []; this.anchor = { count: 0, hash: GENESIS }; }
+  function Chain(scope) { this.scope = scope; this.events = []; this.anchor = { count: 0, hash: GENESIS }; this._tail = Promise.resolve(); }
   Chain.prototype.verify = async function () {
     var v = await verifyEvents(this.events, this.scope);
     if (!v.ok) return v;
@@ -68,7 +68,13 @@
       return res(false, v.count, v.head, null, 'log truncated or replaced: saved head says ' + this.anchor.count + ' events, log has ' + v.count);
     return v;
   };
-  Chain.prototype.append = async function (type, actor, data, now) {
+  /* Appends are serialized: two calls in the same instant can never read the same head and record the same seq (F4). */
+  Chain.prototype.append = function (type, actor, data, now) {
+    var self = this, p = this._tail.then(function () { return self._append(type, actor, data, now); });
+    this._tail = p.then(function () {}, function () {});
+    return p;
+  };
+  Chain.prototype._append = async function (type, actor, data, now) {
     var v = await this.verify();
     if (!v.ok) throw new Error('refusing to append: log failed verification (' + v.error + ')');
     var ev = { run: this.scope, seq: v.count + 1, ts: tsOf(now || new Date()), type: type, actor: actor, data: data, prev: v.head };

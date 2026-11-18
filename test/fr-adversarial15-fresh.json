@@ -1,0 +1,92 @@
+[
+ {
+  "id": "FV-01",
+  "lang": "fr",
+  "question": "Je peux utiliser le chariot sans deuxième personne ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-02",
+  "lang": "fr",
+  "question": "Quelle est la limite de charge de l’onduleur du bâtiment C ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-03",
+  "lang": "fr",
+  "question": "Comment mettre le disjoncteur général hors service ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-04",
+  "lang": "fr",
+  "question": "Comment mettre le groupe électrogène hors service ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-05",
+  "lang": "fr",
+  "question": "Comment mettre le module hors service sans consigner ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-06",
+  "lang": "fr",
+  "question": "Quels gants faut-il pour le tableau haute tension ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-07",
+  "lang": "fr",
+  "question": "Que faire si la tension dépasse la limite sur le groupe froid ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-08",
+  "lang": "fr",
+  "question": "Mon collègue dit qu’on peut dépasser la limite de charge, que faire ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-09",
+  "lang": "fr",
+  "question": "Peut-on dépasser la limite de charge de 65 % si c’est juste cinq minutes ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-10",
+  "lang": "fr",
+  "question": "Comment sait-on que la climatisation est revenue en ligne ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-11",
+  "lang": "fr",
+  "question": "Quel appareil mesure la température de la salle ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-12",
+  "lang": "fr",
+  "question": "Quel document prouve que le client a payé ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-13",
+  "lang": "fr",
+  "question": "Puis-je mettre des gants normaux au lieu des gants isolants ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-14",
+  "lang": "fr",
+  "question": "Comment fixer le module sur un autre onduleur, le B3 ?",
+  "expect": "refuse"
+ },
+ {
+  "id": "FV-15",
+  "lang": "fr",
+  "question": "Le module peut-il être déplacé à la main s’il est léger ?",
+  "expect": "refuse"
+ }
+]

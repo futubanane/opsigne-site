@@ -1,0 +1,323 @@
+[
+ {
+  "id": "OPV-EN-01",
+  "lang": "en",
+  "question": "When do I remove my lock?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-02",
+  "lang": "en",
+  "question": "At which step do we take off the lock?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-03",
+  "lang": "en",
+  "question": "When should I remove the danger tag?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-04",
+  "lang": "en",
+  "question": "When is the padlock taken off?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-05",
+  "lang": "en",
+  "question": "When do I put my lock on?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-EN-06",
+  "lang": "en",
+  "question": "At which step do I apply the lock and tag?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-EN-07",
+  "lang": "en",
+  "question": "Where do I put the danger tag on?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-EN-08",
+  "lang": "en",
+  "question": "When is the lock fitted?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-EN-09",
+  "lang": "en",
+  "question": "How do I open breaker Q3?",
+  "expect": "answer",
+  "steps": [
+   5,
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-EN-10",
+  "lang": "en",
+  "question": "When do I close breaker Q1?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-11",
+  "lang": "en",
+  "question": "When should the input breaker be closed?",
+  "expect": "answer",
+  "steps": [
+   10
+  ],
+  "opposite": [
+   5,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-12",
+  "lang": "en",
+  "question": "When do I open breakers Q1 and Q3?",
+  "expect": "answer",
+  "steps": [
+   13
+  ],
+  "opposite": [
+   10
+  ]
+ },
+ {
+  "id": "OPV-EN-13",
+  "lang": "en",
+  "question": "How do I isolate module 3?",
+  "expect": "answer",
+  "steps": [
+   4,
+   13
+  ],
+  "opposite": [
+   11
+  ]
+ },
+ {
+  "id": "OPV-EN-14",
+  "lang": "en",
+  "question": "How do I bring module 3 back online?",
+  "expect": "answer",
+  "steps": [
+   11
+  ],
+  "opposite": [
+   4,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-15",
+  "lang": "en",
+  "question": "When do I put the module online?",
+  "expect": "answer",
+  "steps": [
+   11
+  ],
+  "opposite": [
+   4,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-16",
+  "lang": "en",
+  "question": "Which step isolates the module on the panel?",
+  "expect": "answer",
+  "steps": [
+   4,
+   13
+  ],
+  "opposite": [
+   11
+  ]
+ },
+ {
+  "id": "OPV-EN-17",
+  "lang": "en",
+  "question": "How do I release the front screws?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9
+  ]
+ },
+ {
+  "id": "OPV-EN-18",
+  "lang": "en",
+  "question": "What torque do I tighten the screws to?",
+  "expect": "answer",
+  "steps": [
+   9
+  ],
+  "opposite": [
+   7
+  ]
+ },
+ {
+  "id": "OPV-EN-19",
+  "lang": "en",
+  "question": "When do I loosen the retaining screws?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9
+  ]
+ },
+ {
+  "id": "OPV-EN-20",
+  "lang": "en",
+  "question": "How do I install the replacement module?",
+  "expect": "answer",
+  "steps": [
+   9
+  ],
+  "opposite": [
+   7
+  ]
+ },
+ {
+  "id": "OPV-EN-21",
+  "lang": "en",
+  "question": "How do I remove the old module?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-22",
+  "lang": "en",
+  "question": "How is module 3 taken out of the cabinet?",
+  "expect": "answer",
+  "steps": [
+   7
+  ],
+  "opposite": [
+   9,
+   13
+  ]
+ },
+ {
+  "id": "OPV-EN-23",
+  "lang": "en",
+  "question": "When do I put on the insulated gloves?",
+  "expect": "answer",
+  "steps": [
+   3
+  ],
+  "opposite": []
+ },
+ {
+  "id": "OPV-EN-24",
+  "lang": "en",
+  "question": "When do I take off the insulated gloves?",
+  "expect": "refuse",
+  "steps": [],
+  "opposite": [
+   3
+  ]
+ },
+ {
+  "id": "OPV-EN-25",
+  "lang": "en",
+  "question": "When do I remove the PPE?",
+  "expect": "refuse",
+  "steps": [],
+  "opposite": [
+   3
+  ]
+ },
+ {
+  "id": "OPV-EN-26",
+  "lang": "en",
+  "question": "When do I take off the face shield?",
+  "expect": "refuse",
+  "steps": [],
+  "opposite": [
+   3
+  ]
+ }
+]

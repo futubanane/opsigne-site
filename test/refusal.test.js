@@ -8,7 +8,10 @@ const MOP = require('../js/mop-data.js');
 const { createQA } = require('../js/qa.js');
 const rd = (f) => JSON.parse(fs.readFileSync(path.join(__dirname, f), 'utf8'));
 const REF = process.env.OPSIGNE_PY || path.resolve(__dirname, '../../opsigne');
-const red = JSON.parse(fs.readFileSync(path.join(REF, 'redteam/questions.json'), 'utf8')).questions;
+/* F8: the red-team questions live in the repo (test/fixtures/); OPSIGNE_PY, when set and valid, overrides them for parity runs. */
+const FIXTURE = path.join(__dirname, 'fixtures', 'redteam-questions.json');
+const refFile = process.env.OPSIGNE_PY && path.join(process.env.OPSIGNE_PY, 'redteam/questions.json');
+const red = JSON.parse(fs.readFileSync(refFile && fs.existsSync(refFile) ? refFile : FIXTURE, 'utf8')).questions;
 const demo = { en: createQA(MOP.en, { lang: 'en', improve: true }), fr: createQA(MOP.fr, { lang: 'fr', improve: true }) };
 
 function falseAnswers(lang, qs) { return qs.filter((q) => q.expect === 'refuse' && demo[lang].ask(q.question).status === 'answer').map((q) => q.id + ' ' + q.question); }

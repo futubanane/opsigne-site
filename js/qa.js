@@ -46,7 +46,13 @@
      Each one maps a spelling/synonym of a term that IS in the approved text onto the term the approved text uses. */
   var IMPROVE_EN = {
     pre: function (f) {
-      return f.replace(/\broll[\s-]+back\b/g, 'rollback')
+      return f.replace(/\bpadlocks?\b/g, 'lock').replace(/\bdanger\s+tags?\b/g, 'tag')
+              .replace(/\b(?:take|taken|took|taking|takes)\s+((?:\w+\s+){0,3}?)(?:off|out)\b/g, 'remove $1')                            /* take off / take out = remove (step 10, step 7) */
+              .replace(/\b(?:put|puts|place|placed|fit|attach|affix|hang)\b((?:\s+\w+){0,3}?)\s+(lock|tag)\b/g, 'apply$1 $2')      /* put / fit the lock = apply (step 5) */
+              .replace(/\b(lock|tag)\s+(?:is\s+|are\s+|be\s+|been\s+)?(?:put\s+on|fitted|placed|attached|applied|hung)\b/g, 'apply $1')
+              .replace(/\b(?:put|bring|brought|switch|turn|set)\b((?:\s+\w+){0,3}?)\s+(?:back\s+)?on-?line\b/g, 'bring$1 online')
+              .replace(/\b(?:loosen|unscrew|slacken)\w*/g, 'release')
+              .replace(/\broll[\s-]+back\b/g, 'rollback')
               .replace(/\b(dead|de-?energi[sz]ed|voltage[\s-]+free)\b/g, 'zero')
               .replace(/\b(personal\s+)?protective\s+(equipment|gear|clothing)\b/g, 'ppe');
     },
@@ -96,8 +102,8 @@
 
   /* ---------------- French rule pack (written for this site; patterns run on accent-folded lowercase for the word lists) ---------------- */
   var FR = {
-    stop: set('le la les l un une des du de d et ou mais si alors a au aux en dans sur par pour avec que qui quoi quel quelle quels quelles ce cet cette ces est sont etre ete faut fait faire je j tu il elle on nous vous ils elles me m mon ma mes votre vos notre nos y ne n pas plus se s sa son ses c t qu jusqu lorsqu comment quand pourquoi combien dois doit doivent peut peux puis veux veut faut avoir ai as ont avons avez va vais aller svp merci dis dites etape etapes procedure procedures mop oui non tout tous toute toutes aussi tres plus moins seulement meme cas'),
-    alias: { poids: 'pes', lourd: 'pes', lourde: 'pes', pese: 'pes', verrouillage: 'verrou', verrouiller: 'verrou', verrouille: 'verrou', cadenas: 'verrou', cadenassage: 'verrou', consignation: 'verrou', consigner: 'verrou', loto: 'verrou', etiquetage: 'etiquet', etiquette: 'etiquet', tagout: 'verrou', lockout: 'verrou' },
+    stop: set('le la les l un une des du de d et ou mais si alors a au aux en dans sur par pour avec que qui quoi quel quelle quels quelles ce cet cette ces est sont etre ete faut fait faire je j tu il elle on nous vous ils elles me m mon ma mes votre vos notre nos y ne n pas plus se s sa son ses ton ta tes te toi ca cela ceci c t qu jusqu lorsqu comment quand pourquoi combien dois doit doivent peut peux puis veux veut faut avoir ai as ont avons avez va vais aller svp merci dis dites etape etapes procedure procedures mop oui non tout tous toute toutes aussi tres plus moins seulement meme cas'),
+    alias: { onduleur: 'ups', onduleurs: 'ups', poids: 'pes', lourd: 'pes', lourde: 'pes', pese: 'pes', verrouillage: 'verrou', verrouiller: 'verrou', verrouille: 'verrou', cadenas: 'verrou', cadenassage: 'verrou', consignation: 'verrou', consigner: 'verrou', loto: 'verrou', etiquetage: 'etiquet', etiquette: 'etiquet', tagout: 'verrou', lockout: 'verrou' },
     suffixes: ['ations', 'ation', 'ements', 'ement', 'ments', 'ment', 'ees', 'ee', 'es', 'er', 'ez', 's', 'x', 'e'],
     injection: [
       /\b(ignor\w*|oubli\w*|neglig\w*|contourn\w*|annul\w*)\b.{0,40}\b(instructions?|consignes?|regles?|prompt|procedures?|precedent\w*|ci-dessus)\b/is,
@@ -108,22 +114,46 @@
       /\ba\s+partir\s+de\s+maintenant\b/is, /\bla\s+procedure\s+(dit|indique|precise)\s+maintenant\b/is, /\bignore\b.{0,40}\b(instructions?|rules?|prompt)\b/is],
     shortcut: /\b(sauter|saute|sautons|sautant|ignorer|ignore|ignorant|contourner|contourne|contournant|omettre|omets|dispenser|dispense|desactiver|desactive|raccourci|sans|gagner\s+du\s+temps|pas\s+besoin|inutile|pas\s+necessaire|au\s+lieu\s+de|seul|seule|moi-meme|moi\s+meme|quelqu\s+un\s+d\s+autre|continuer\s+quand\s+meme|passer\s+outre|tant\s+pis|rapidement|vite)\b/,
     permission: /\b(puis-je|puis\s+je|peut-on|peut\s+on|pouvons-nous|pourrait-on|pourrais-je|je\s+peux|on\s+peut|ai-je\s+le\s+droit|a-t-on\s+le\s+droit|est-ce\s+que\s+je\s+peux|est-ce\s+que\s+je\s+dois|est-il\s+(ok|possible|permis|acceptable|autorise|necessaire|obligatoire|facultatif)|est-ce\s+(ok|autorise|permis|obligatoire|necessaire|facultatif)|facultatif|optionnel|vraiment\s+(besoin|obligatoire|necessaire)|doit-on|dois-je\s+vraiment|et\s+si\s+je|autorise|permis)\b|\bnon\s*\?\s*$/,
-    shortcutExtra: /\b(laisser\s+de\s+cote|se\s+passer|plutot\s+que|a\s+la\s+main|une\s+seule\s+personne|une\s+personne\s+seule|auto-?verif\w*|tot|presse|hate|pas\s+(de\s+)?(verrou\w*|cadenas\w*|attendre|tester|verifier|porter)|seulement\s+(l\s+etiquette|le\s+cadenas|attendre)|inferieur\w*|moins\s+cher|plus\s+fin|poursuivre|continuer|quand\s+meme|malgre|cocher\s+\w+\s+comme\s+fait)\b/,
+    shortcutExtra: /\b(laisser\s+de\s+cote|(se|me|te|nous|vous)\s+passer|plutot\s+que|a\s+la\s+main|une\s+seule\s+personne|une\s+personne\s+seule|auto-?verif\w*|tot|presse|hate|pas\s+(de\s+)?(verrou\w*|cadenas\w*|attendre|tester|verifier|porter)|seulement\s+(l\s+etiquette|le\s+cadenas|attendre)|inferieur\w*|moins\s+cher|plus\s+fin|poursuivre|continuer|quand\s+meme|malgre|cocher\s+\w+\s+comme\s+fait)\b/,
     runtime: /\b(telephone|portable|mail|courriel|e-mail|contact|hier|derniere?\s+(fois|changement|semaine|nuit|intervention)|changement\s+precedent|equipe\s+precedente|qui\s+est\s+(le\s+|la\s+)?(chef|astreinte|de\s+garde)|numero\s+de)\b/,
     authority: /\b(a|ont|avait)\s+(ete\s+)?(autorise\w*|approuve\w*|valide\w*|dispense\w*)\b|\b(autorise\w*|approuve\w*|valide\w*|dispense\w*)\s+par\b|\b(superviseur|manager|responsable|chef\s+de\s+quart|chef|patron)\s+(a\s+dit|dit|m\s+a\s+dit|permet|autorise|a\s+autorise|a\s+approuve)\b|\ba\s+ete\s+(mise?\s+a\s+jour|modifiee?|revisee?|changee?)\b|\bmise?\s+a\s+jour\s+(pour|en)\b|\brepete\s+apres\s+moi\b|\bsans\s+restriction\b|\bdonnees\s+d\s+entrainement\b|\bdit\s+maintenant\b|\bimprime\s+ton\b/,
-    equipment: set('generator genset switchgear switchboard msb chiller crah crac pdu battery batteries transformer fuel kv cooling sprinkler rack server ats sts bms dcim ventilation generateur groupe electrogene tableau climatisation clim batterie transformateur carburant refroidissement extinction baie serveur onduleur'),
+    equipment: set('generator genset switchgear switchboard msb chiller crah crac pdu battery batteries transformer fuel kv cooling sprinkler rack server ats sts bms dcim ventilation generateur groupe electrogene tableau climatisation clim batterie transformateur carburant refroidissement extinction baie serveur'),
     asset: /\b(UPS|PDU|CRAH|CRAC|GEN|ATS|STS|BMS|RPP|MDB|PAC|FCU|BATT?)[-\s]?([A-Z]?\d+[A-Z0-9]*)\b/gi,
     wh: /^\s*(que|qu|quel|quelle|quels|quelles|qui|quand|ou|comment|combien|pourquoi|quoi|lequel|laquelle)\b(?!\s+(si|et\s+si)\s+(je|j)\b)/,
     stepRef: /\b(?:etape|step)\s+(\d{1,2})\b/,
     itemWords: { module: 1, emplacement: 1, slot: 1, disjoncteur: 1, phase: 1, unite: 1 },
     unknownAttr: set('prix cout couts tarif tarifs motdepasse identifiant garantie couleur fabricant fabricants fournisseur fournisseurs marque modele budget facture salaire'),
-    pre: function (f) { return f.replace(/\bmots?\s+de\s+passe\b/g, 'motdepasse').replace(/\bequipements?\s+de\s+protection(\s+individuelle)?\b/g, 'epi').replace(/\bretour\s+arriere\b/g, 'repli').replace(/\b(revenir|retourner|reculer|faire\s+marche)\s+(en\s+)?arriere\b/g, 'repli').replace(/\bannul(er|ation)\b/g, 'repli').replace(/\b(hors\s+tension|sans\s+tension|mort)\b/g, 'zero'); },
+    pre: function (f) { return f.replace(/\bmots?\s+de\s+passe\b/g, 'motdepasse').replace(/\bequipements?\s+de\s+protection(\s+individuelle)?\b/g, 'epi').replace(/\bretour\s+arriere\b/g, 'repli').replace(/\b(revenir|retourner|reculer|faire\s+marche)\s+(en\s+)?arriere\b/g, 'repli').replace(/\bannul(er|ation)\b/g, 'repli').replace(/\b(hors\s+tension|sans\s+tension|mort)\b/g, 'zero')
+      /* F5: ordinary French phrasings of terms the approved text states otherwise */
+      .replace(/\b(plus\s+de|absence\s+de|aucun|hors)\s+courant\b/g, 'zero')                                   // "plus de courant" = absence de tension (step 6)
+      .replace(/\b(mett\w+|pass\w+|plac\w+)((?:\s+\w+){0,3}?)\s+hors\s+service\b/g, 'isoler$2')                  // "mettre le module 3 hors service" = isoler (step 4)
+      .replace(/\b(revenu|revenue|revient|reviens|revenir)\s+en\s+ligne\b/g, 'en ligne')                         // "revenu en ligne" = EN LIGNE (step 11); "revenir en arriere" is handled above
+      .replace(/\b(depasse\w*|superieur\w*|excede\w*)\s+(la\s+|le\s+|l\s+)?(limite|maximum|seuil|plage)\b/g, 'repli')   // a reading above the limit = the procedure's own fallback (rollback step)
+      .replace(/\b(gants?|epi|ecran\s+facial)\b([^?.]{0,40}?)\b(mettre|mettez|mets|met|porter|portez|enfilez)\b/g, '$1$2enfiler')   // "quels gants dois-je mettre" = enfiler (step 3)
+      .replace(/\b(mettre|mettez|mets|porter|portez|enfilez)\b([^?.]{0,40}?)\b(gants?|epi|ecran\s+facial)\b/g, 'enfiler$2$3')
+      /* QA1: the two opposite verbs for the padlock/tag/module are written one way (retirer / poser); ordinary synonyms are mapped onto them */
+      .replace(/\b(retir\w*|enlev\w*|ot(e|es|er|ez|ons|ent|ee|ees)|depos\w*|deverrouill\w*)\b/g, 'retirer')                       // enlever / oter / deposer = retirer (step 10, step 7)
+      .replace(/\b(mett\w+|mets|met|remett\w*|remets|appos\w*|accroch\w*|plac(e|es|er|ez|ons|ent))\b(?=[^?.]{0,40}\b(cadenas|etiquet\w*|verrou\w*)\b)/g, 'poser')   // mettre / apposer le cadenas = poser (step 5)
+      .replace(/\bpos(ons|ent|ee|ees)\b/g, 'poser').replace(/\b(n\s+y\s+a\s+plus|plus)\s+de\s+tension\b/g, 'zero tension').replace(/\betiquet\w*\s+(de\s+)?danger\b/g, 'etiquette')
+      .replace(/\b(re)?(mett\w+|mets|met|remis\w*|pass\w*|bascul\w*|ramen\w*)\b([^?.]{0,25}?)\b(en\s+ligne|en\s+service)\b/g, '$3 en ligne')   // remettre le module en ligne = en ligne (step 11)
+      .replace(/\ben\s+service\b/g, 'en ligne'); },
     support: {
-      filler: set('quelque chose choses tout rien passe passer arrive arrive arriver mal probleme problemes souci soucis ennui echec echoue echouer requis requise requises necessaire necessaires avant apres premier premiere dernier prochain suivant commencer commence debut debuter finir termine fin dire dit dites lire lis lit expliquer explique montrer montre decrire decris signifie signifier detail details donner donne prendre prend faire fais fait utiliser utilise utilisee savoir trouver trouve voir vois regarder regarde bien correctement exactement vraiment entier entiere complet complete si sinon chaque deux beaucoup longtemps soit toucher intervention travail operation tache pendant durant jusqu pouvoir contient contenu contenir hors seulement lorsque quand'),
+      filler: set('moment laisser laisse laissez approximatif approximative approximativement demarrer demarre demarr situer trop elevee elevees eleve eleves haute hautes sait sais place places quelque chose choses tout rien passe passer arrive arrive arriver mal probleme problemes souci soucis ennui echec echoue echouer requis requise requises necessaire necessaires avant apres premier premiere dernier prochain suivant commencer commence debut debuter finir termine fin dire dit dites lire lis lit expliquer explique montrer montre decrire decris signifie signifier detail details donner donne prendre prend faire fais fait utiliser utilise utilisee savoir trouver trouve voir vois regarder regarde bien correctement exactement vraiment entier entiere complet complete si sinon chaque deux beaucoup longtemps soit toucher intervention travail operation tache pendant durant jusqu pouvoir contient contenu contenir hors seulement lorsque lors quand peuvent regardes regardez rappelle rappelles rappelez rappeler entre'),
       syn: {
+        depasser: ['__range'], depasse: ['__range'], depass: ['__range'], revient: ['revenir'], reviens: ['revenir'], observer: ['inspect'], observ: ['inspect'], monter: ['inser'], mont: ['inser'],
+        appareil: ['testeur', 'afficheur'], document: ['demand', 'chang'], docu: ['demand', 'chang'],
+        protection: ['epi', 'gant', 'ecran'], manipuler: ['soulev', 'gliss', 'retir'], manipulation: ['soulev', 'gliss', 'retir'],
+        deplacer: ['gliss', 'chariot'], deplac: ['gliss', 'chariot'], essayer: ['test'], essay: ['test'], tolere: ['__range'], toler: ['__range'], tolerable: ['__range'],
+        tiennent: ['maintien'], tient: ['maintien'], tenir: ['maintien'], ouvrant: ['ouvrir'], fixer: ['serr', 'inser'], fix: ['serr', 'inser'], fixe: ['serr', 'inser'],
+        risques: ['dang', 'danger', 'attention'], risqu: ['dang', 'danger', 'attention'],
         controler: ['verifi', 'inspect', 'confirm', 'test', 'lire'], controle: ['verifi', 'inspect', 'confirm', 'test', 'lire'], verification: ['verifi'], precaution: ['danger', 'attention', 'epi'], precautions: ['danger', 'attention', 'epi'], equipement: ['epi', 'equipement'], arc: ['arc'],
         couple: ['nm'], transferer: ['port'], transfer: ['port'], transfert: ['port'], maximal: ['__range'], maximale: ['__range'], minimal: ['__range'], minimale: ['__range'], serrage: ['serr'], serrer: ['serr'], visser: ['serr'], lourd: ['pes'], pese: ['pes'], poids: ['pes'], porter: ['equipement', 'epi'], mettre: ['enfil', 'epi', 'inser'], mettr: ['enfil', 'epi', 'inser'],
-        installer: ['inser'], poser: ['inser', 'repos'], remplacer: ['inser', 'remplacement'], remplac: ['inser', 'remplacement'], nouveau: ['remplacement'], neuf: ['remplacement'], echanger: ['inser', 'remplacement'],
+        avertit: ['prevenir'], avertir: ['prevenir'], avertissez: ['prevenir'], avertis: ['prevenir'], informer: ['prevenir'], informe: ['prevenir'], informez: ['prevenir'], alerter: ['prevenir'], alertez: ['prevenir'], notifier: ['prevenir'], notifiez: ['prevenir'], prevenez: ['prevenir'], preven: ['prevenir'], previens: ['prevenir'], prevenu: ['prevenir'], prevenue: ['prevenir'],
+        encaisser: ['port'], encaiss: ['port'], supporter: ['port'], absorber: ['port'], autres: ['restant'], autre: ['restant'], type: ['isolant', 'adapt'], typ: ['isolant', 'adapt'],
+        verifi: ['verifi', 'test', 'prouv', 'inspect', 'confirm'], verifier: ['verifi', 'test', 'prouv', 'inspect', 'confirm'], sort: ['retir', 'gliss'], sorti: ['sorti'],
+        compar: ['compar', 'correspond'], comparer: ['compar', 'correspond'], compare: ['compar', 'correspond'], comparez: ['compar', 'correspond'],
+        patienter: ['attend'], patient: ['attend'], patiente: ['attend'], patientez: ['attend'],
+        installer: ['inser'], install: ['inser'], installe: ['inser'], ancien: ['retir'], ancienne: ['retir'], poser: ['inser', 'repos'], remplacer: ['inser', 'remplacement'], remplac: ['inser', 'remplacement'], nouveau: ['remplac', 'remplacement'], neuf: ['remplac', 'remplacement'], echanger: ['inser', 'remplacement'],
         retirer: ['retir'], enlever: ['retir'], extraire: ['retir'], demonter: ['retir', 'desserr'], sortir: ['retir'], soulever: ['soulev', 'chariot'], inspecter: ['inspect'], examiner: ['inspect'], endommage: ['dommage'], casse: ['dommage'], abime: ['dommage'],
         maximum: ['__range'], minimum: ['__range'], max: ['__range'], min: ['__range'], plage: ['__range'], limite: ['__range', 'limit'], admis: ['__range'], acceptable: ['__range'], attendu: ['__range'],
         valeur: ['__range', 'nm'], releve: ['__range', 'lire'], mesure: ['__range', 'lire'], mesurer: ['__range', 'lire'], seuil: ['__range', 'limit'], tolerance: ['__range'], pourcentage: ['%', 'charge'], pourcent: ['charge'],
@@ -132,7 +162,7 @@
       },
       intents: [
         { ask: /\bcombien\s+de\s+(temps|secondes?|minutes?|heures?)\b|\bduree\b|\bpendant\s+combien\b/g, has: /\b(secondes?|minutes?|heures?|jours?)\b/ },
-        { ask: /\bqui\b/g, has: /\b(personnes?|chef|superviseur|operateur|equipe|verificateur|collegue)\b/ },
+        { ask: /\bqui\b|\bquelqu\s+un\b/g, has: /\b(personnes?|chef|superviseur|operateur|equipe|verificateur|collegue)\b/ },
         { ask: /\bpourquoi\b|\bque\s+se\s+passe\b|\bqu\s+arrive\s+t\s*il\b|\braison\b|\ba\s+quoi\s+sert\b|\bsert\s+a\s+quoi\b/g, has: /\b(car|parce|afin|pour\s+eviter|sinon|raison)\b/ },
         { ask: /\b(quel|quelle|quels|quelles)\s+(est|sont)\s+(la|le|l|les)\s+(\w+\s+)?(reference|numero|serie|modele|version|code|identifiant|firmware)\b/g, has: /\b(reference|numero|serie|modele|version|code|identifiant|firmware)\s+(\w+\s+){0,2}\w*\d/ },
         { ask: /\bcombien\b/g, has: /\d|\b(un|une|deux|trois|quatre|cinq|six|tous|chacun)\b/ }
@@ -149,6 +179,33 @@
   function cpLen(s) { var n = 0; for (var c of s) { n++; } return n; }  // code points, like Python len()
   function assetKey(s) { return s.toUpperCase().replace(/[^A-Z0-9]/g, ''); }
   function vkey(v) { return v.split(/[.\-]/).map(function (x) { return /^\d+$/.test(x) ? parseInt(x, 10) : x; }); }
+
+
+  /* QA1: opposite-action pairs (put on / take off, open / close, isolate / online, tighten / loosen, insert / remove).
+     A question that uses one verb of a pair must never be answered with a step that only does the OPPOSITE action on the same object.
+     q* = patterns on the folded question (any conjugation), s* = patterns on the folded step title+text (infinitive/imperative only, negated verbs and the WARNING text ignored).
+     obj/nobj = the pair only applies when the question names (obj) / does not name (nobj) these objects. Pure filter: it can only remove candidate steps, never add one. */
+  var POL_FR = [
+    { promote: 1, obj: /\b(cadenas|etiquet\w*|verrou\w*|consign\w*|loto)\b/, A: /\b(pos(e|es|er|ez|ons|ent|ee|ees)|repos\w*|appos\w*|mett\w+|mets|met|remett\w*|remets|appliqu\w*|install\w*|accroch\w*|plac(e|es|er|ez|ons|ent)|verrouill\w*|cadenass\w*|consign\w*)\b/, B: /\b(retir\w*|enlev\w*|ot(e|es|er|ez|ons|ent|ee|ees)|depos\w*|deverrouill\w*|decadenass\w*|deconsign\w*|lev(e|er|ez|ons))\b/,
+      sA: /\b(poser|reposer|apposer|mettre|remettre|appliquer|installer|accrocher|verrouiller)\b/, sB: /\b(retirer|enlever|oter|deposer|deverrouiller)\b/ },
+    { obj: /\b(disjoncteurs?|q\d)\b/, A: /\b(ouvr\w*|ouvert\w*)\b/, B: /\b(ferm\w*|clos\w*|clor\w*)\b/, sA: /\bouvrir\b/, sB: /\bfermer\b/ },
+    { A: /\b(isol(e|es|er|ez|ons|ent|ee|ees|ation)|hors\s+service|deconnect\w*)\b/, B: /\b(en\s+ligne|online|en\s+service|reconnect\w*|reintegr\w*)\b/, sA: /\bisoler\b/, sB: /\ben\s+ligne\b/ },
+    { A: /\b(serr\w*|resserr\w*|viss\w*)\b/, B: /\b(desserr\w*|devis\w*|relach\w*)\b/, sA: /\b(serrer|resserrer|visser)\b/, sB: /\b(desserrer|devisser)\b/ },
+    { promote: 1, obj: /\b(modules?|ancien\w*|unites?|chassis)\b/, nobj: /\b(cadenas|etiquet\w*|verrou\w*|consign\w*|gants?|epi|ecran|disjoncteurs?|q\d)\b/, A: /\b(install\w*|reinstall\w*|inser\w*|mont(e|es|er|ez|ons|ent|age))\b/, B: /\b(retir\w*|enlev\w*|ot(e|es|er|ez|ons|ent)|extrai\w*|extract\w*|sort(ir|e|es|ez|ons|ent)|demont\w*|depos\w*)\b/,
+      sA: /\b(installer|reinstaller|inserer|monter)\b|\bglisser\b[^.]{0,60}\bemplacement\b/, sB: /\b(retirer|enlever|extraire|sortir|demonter)\b(?![^.]{0,30}(cadenas|etiquet|verrou))|\bglisser\b[^.]{0,40}\bchariot\b/ },
+    { obj: /\b(gants?|epi|ecran|casque|tenue|equipements?)\b/, A: /\b(enfil\w*|mett\w+|mets|met|porter|portez|portons|revet\w*|equip\w*)\b/, B: /\b(enlev\w*|retir\w*|ot(e|es|er|ez|ons)|quitt\w*|depos\w*)\b/, sA: /\benfiler\b/, sB: /\b(enlever|retirer|oter|quitter)\b/ }
+  ];
+  var POL_EN = [
+    { promote: 1, obj: /\b(locks?|padlocks?|tags?|lockout|tagout|loto)\b/, A: /\b(put|puts|putting|apply|applies|applied|applying|fit|fits|fitted|fitting|attach\w*|affix\w*|hang\w*|place\w*|placing|install\w*|re-?appl\w*|re-?fit\w*)\b/, B: /\b(remov\w*|unlock\w*|detach\w*|pull\w*|releas\w*|lift\w*)\b/,
+      sA: /\b(apply|re-?apply|put|fit|attach|install|place)\b/, sB: /\b(remove|release|detach|unlock)\b/ },
+    { obj: /\b(breakers?|q\d)\b/, A: /\bopen\w*/, B: /\b(clos\w*|shut\w*)\b/, sA: /\bopen\b/, sB: /\bclose\b/ },
+    { A: /\b(isolat\w*|disconnect\w*|offline|out\s+of\s+service)\b/, B: /\b(online|on-?line|in\s+service|reconnect\w*|re-?integrat\w*)\b/, sA: /\bisolate\b/, sB: /\bonline\b/ },
+    { A: /\b(tighten\w*|fasten\w*)\b/, B: /\b(loosen\w*|releas\w*|unscrew\w*|slacken\w*)\b/, sA: /\btighten\b/, sB: /\b(release|loosen)\b/ },
+    { promote: 1, obj: /\b(modules?|old|units?)\b/, nobj: /\b(locks?|padlocks?|tags?|lockout|ppe|gloves?|shield|breakers?|q\d)\b/, A: /\b(install\w*|insert\w*|fit|fits|fitted|fitting|mount\w*|reinstall\w*)\b/, B: /\b(remov\w*|extract\w*|withdraw\w*|pull\w*|detach\w*|uninstall\w*)\b/,
+      sA: /\b(insert|install|re-?install)\b|\bslide\b[^.]{0,40}\bslot\b/, sB: /\bremove\b(?![^.]{0,30}\b(lock|tag)\b)|\bslide\b[^.]{0,40}\btrolley\b|\bextract\b|\bwithdraw\b/ },
+    { obj: /\b(ppe|gloves?|shield|helmet|gear|equipment|clothing)\b/, A: /\b(put\s+(\w+\s+){0,3}?on|wear\w*|don|donning)\b/, B: /\b(remov\w*|doff\w*|stop\s+wearing)\b/, sA: /\b(put\s+on|wear)\b/, sB: /\b(take\s+off|remove|doff)\b/ }
+  ];
+  var POL_NEG = { fr: /\bne\s+(jamais|pas|plus)\s+\w+(\s+(ni|ou)\s+\w+)?/g, en: /\b(never|do\s+not|don\s*t|must\s+not|not)\s+\w+(\s+(or|nor)\s+\w+)?/g };
 
   function createQA(doc, opts) {
     opts = opts || {};
@@ -250,6 +307,30 @@
       });
     }
 
+
+    /* QA1: polarity (see POL_* above) */
+    var POL = (lang === 'fr' || improve) ? (lang === 'fr' ? POL_FR : POL_EN) : null;
+    function polOf(c) {
+      if (c.pol) return c.pol;
+      var f = fold2(c.step.title + ' . ' + c.step.text).replace(POL_NEG[lang], ' ');
+      c.pol = POL.map(function (p) { return { a: p.sA.test(f), b: p.sB.test(f), o: !p.obj || p.obj.test(f) }; });
+      return c.pol;
+    }
+    function polPlan(question) {
+      var f0 = fold2(question), f1 = pre ? pre(f0) : f0, plan = [];
+      var any = function (re) { return re.test(f0) || re.test(f1); };
+      if (POL) POL.forEach(function (p, i) {
+        if ((p.obj && !any(p.obj)) || (p.nobj && any(p.nobj))) return;
+        var a = any(p.A), b = any(p.B);
+        if (a !== b) plan.push({ i: i, a: a, pr: !!p.promote });
+      });
+      return plan;
+    }
+    function polKeep(plan, c) {
+      var pc = polOf(c);
+      return plan.every(function (x) { var s = pc[x.i]; return !s.o || (x.a ? !(s.b && !s.a) : !(s.a && !s.b)); });
+    }
+
     function render(d, s) {
       if (lang === 'fr') {
         var t = '[' + d.id + ' v' + d.version + ' étape ' + s.n + '] ' + s.title + ' : ' + s.text;
@@ -339,6 +420,14 @@
       var rbTerm = lang === 'fr' ? P.rollbackTerm : (improve && IMPROVE_EN.rollbackRouting ? 'rollback' : null);
       if (rbTerm && qTerms.indexOf(rbTerm) >= 0 && ranked.some(function (r) { return r[2].step.rollback; })) {
         ranked = ranked.filter(function (r) { return r[2].step.rollback; }).concat(ranked.filter(function (r) { return !r[2].step.rollback; }));
+      }
+      var plan = polPlan(question);
+      if (plan.length) {
+        ranked = ranked.filter(function (r) { return polKeep(plan, r[2]); });
+        if (!ranked.length) return out('refused', 'opposite_action_not_in_procedure');
+        /* steps that do exactly the asked action (and not its opposite) go first, among the steps that already pass the thresholds */
+        var exact = function (r) { return r[0] >= MIN_SCORE && r[1] >= MIN_COVERAGE && plan.some(function (x) { var s = polOf(r[2])[x.i]; return x.pr && s.o && (x.a ? s.a && !s.b : s.b && !s.a); }); };
+        ranked = ranked.filter(exact).concat(ranked.filter(function (r) { return !exact(r); }));
       }
       var top = ranked[0], topS = top[0], topCov = top[1];
       var conf = { score: r3(topS), coverage: r3(topCov) };

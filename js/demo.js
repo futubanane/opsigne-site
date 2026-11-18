@@ -86,7 +86,7 @@
   function short(x) { return x ? x.slice(0, 10) + '\u2026' : ''; }
   function say(msg) { var l = $('live'); l.textContent = ''; setTimeout(function () { l.textContent = msg; }, 30); }
 
-  var S = { run: null, st: null, tamper: null, verify: null, logAll: false, drawn: 0 };
+  var S = { run: null, st: null, tamper: null, verify: null, logAll: false, drawn: 0, gen: 0 };   // gen: bumped by reset/tamper so a late async result of the old state is ignored (F7)
   var LOG_TAIL = 4;
 
   /* ---------- engine label ---------- */
@@ -161,7 +161,8 @@
 
   /* ---------- execution pane ---------- */
   function refreshExec(focusHeading) {
-    return S.run.state().then(function (st) { S.st = st; renderExec(focusHeading); });
+    var run = S.run, gen = S.gen;
+    return run.state().then(function (st) { if (S.run !== run || S.gen !== gen) return; S.st = st; renderExec(focusHeading); });
   }
   function progressBar(st) {
     var bar = $('prog'); clear(bar);
@@ -234,7 +235,7 @@
 
   function fail(e) {
     var code = e && e.code, text = T.err[code] || String(e && e.message || e);
-    if (code === 'log_failed') { return S.run.chain.verify().then(function (v) { S.verify = v; renderVerify(); renderChain(); msg('step-msg', text); }); }
+    if (code === 'log_failed' && S.run) { var run = S.run, gen = S.gen; return run.chain.verify().then(function (v) { if (S.run !== run || S.gen !== gen) return; S.verify = v; renderVerify(); renderChain(); msg('step-msg', text); }); }
     msg('step-msg', text); return Promise.resolve();
   }
 
@@ -243,30 +244,38 @@
       var b = $('dev-box'), open = b.hidden; b.hidden = !open; this.setAttribute('aria-expanded', String(open)); if (open) $('dev-reason').focus();
     });
     $('dev-save').addEventListener('click', function () {
-      S.run.deviation(step.n, $('dev-reason').value).then(function () { $('dev-reason').value = ''; $('dev-box').hidden = true; $('dev-toggle').setAttribute('aria-expanded', 'false'); renderChain(); msg('step-msg', T.devOk); say(T.devOk); }, fail);
+      var db = this; if (db.getAttribute('data-pending') || S.confirming) return; db.setAttribute('data-pending', '1');
+      S.run.deviation(step.n, $('dev-reason').value).then(function () { $('dev-reason').value = ''; $('dev-box').hidden = true; $('dev-toggle').setAttribute('aria-expanded', 'false'); renderChain(); msg('step-msg', T.devOk); say(T.devOk); }, fail).then(function () { db.removeAttribute('data-pending'); });
     });
-    $('confirm').addEventListener('click', function () {
+    var run = S.run, confirmBtn = $('confirm');
+    confirmBtn.addEventListener('click', function () {
+      /* F4: ignore a second activation while the first is being processed, or once this card has been replaced by the next step */
+      if (S.confirming || S.run !== run || !confirmBtn.isConnected) return;
+      S.confirming = true; confirmBtn.setAttribute('data-pending', '1');
       msg('step-msg', '');
       var a = {};
       if (step.warning) a.ack = $('ack').checked;
       if (step.verify2) a.verifier = $('verifier').value;
       if (step.hold && !rollback) { var rv = O.engine.parseReading($('reading').value); a.reading = rv === null ? undefined : rv; }
-      S.run.complete(step.n, a).then(function (res) {
+      run.complete(step.n, a).then(function (res) {
         return refreshExec(true).then(function () {
           if (res.stopped) say(T.stopH); else if (res.status === 'completed') say(T.doneH); else if (S.st.current) say(f(T.stepOf, { n: S.st.current.n, t: S.st.progress.total }));
         });
-      }, fail);
+      }, fail).then(function () { if (S.run === run) S.confirming = false; }, function () { if (S.run === run) S.confirming = false; });
     });
   }
 
   /* ---------- start / reset / log buttons ---------- */
   function start(ev) {
     ev.preventDefault(); msg('start-msg', '');
-    O.engine.startRun(DOC, $('op-name').value).then(function (run) { S.run = run; S.verify = null; S.tamper = null; renderVerify(); return refreshExec(true); },
-      function (e) { msg('start-msg', T.err[e.code] || String(e.message)); });
+    if (S.starting || S.run) return;      /* F4: one start per activation burst; a run already exists */
+    S.starting = true; var gen = S.gen;
+    O.engine.startRun(DOC, $('op-name').value).then(function (run) { if (S.gen !== gen) return; S.run = run; S.verify = null; S.tamper = null; renderVerify(); return refreshExec(true); },
+      function (e) { msg('start-msg', T.err[e.code] || String(e.message)); }).then(function () { if (S.gen === gen) S.starting = false; }, function () { if (S.gen === gen) S.starting = false; });
   }
   function reset() {
-    S.run = null; S.st = null; S.tamper = null; S.verify = null; S.logAll = false;
+    S.run = null; S.st = null; S.tamper = null; S.verify = null; S.logAll = false; S.gen++; S.confirming = false; S.starting = false;
+    ['btn-verify', 'rep-html', 'rep-json'].forEach(function (id) { var b = $(id); b.removeAttribute('data-pending'); b.removeAttribute('aria-busy'); });
     clear($('step-area')); $('run-area').hidden = true; $('start-form').hidden = false; $('op-name').value = ''; msg('start-msg', ''); msg('tamper-out', '');
     renderChain(); renderVerify(); clear($('qa-out')); $('qa-in').value = ''; $('op-name').focus(); say('Reset');
   }
@@ -296,7 +305,9 @@
   function verify() {
     var vb = $('btn-verify');
     if (!S.run || vb.getAttribute('data-pending')) return;
-    busy(vb, S.run.chain.verify()).then(function (v) {
+    var run = S.run, gen = S.gen;
+    busy(vb, run.chain.verify()).then(function (v) {
+      if (S.run !== run || S.gen !== gen) return;      /* F7: a verify that finishes after a reset (or a tamper) is stale: show nothing */
       S.verify = v; renderChain(); renderVerify();
       var badEl = document.querySelector('#chain .ev-bad');
       if (badEl) { var box = $('chain-box'); box.scrollTop = Math.max(0, badEl.offsetTop - box.offsetTop - 40); }   // show WHERE it broke
@@ -306,7 +317,7 @@
   }
   function tamper() {
     if (!S.run || S.tamper) return;
-    var i = S.run.simulateTamper(); S.tamper = i; S.verify = null;
+    var i = S.run.simulateTamper(); S.tamper = i; S.verify = null; S.gen++;
     msg('tamper-out', f(T.tampDone, { n: i.seq, f: i.field === 'reading' ? (lang === 'fr' ? 'relev\u00e9' : 'reading') : (lang === 'fr' ? 'acteur' : 'actor'), b: i.before, a: i.after }));
     renderChain(); renderVerify(); $('btn-verify').focus();
   }
@@ -341,8 +352,10 @@
   function report(kind) {
     if (!S.run) return;
     var rb = $(kind === 'html' ? 'rep-html' : 'rep-json'); if (rb.getAttribute('data-pending')) return;
-    busy(rb, S.run.report({ lang: lang, engine: O.sha.lastEngine() })).then(function (rep) {
-      var base = 'opsigne-' + (lang === 'fr' ? 'rapport' : 'report') + '-' + S.run.runId;
+    var run = S.run, gen = S.gen;
+    busy(rb, run.report({ lang: lang, engine: O.sha.lastEngine() })).then(function (rep) {
+      if (S.run !== run || S.gen !== gen) return;
+      var base = 'opsigne-' + (lang === 'fr' ? 'rapport' : 'report') + '-' + run.runId;
       if (kind === 'html') download(base + '.html', 'text/html;charset=utf-8', rep.html);
       else download(base + '.json', 'application/json;charset=utf-8', JSON.stringify(rep.json, null, 2));
       say(rep.json.verification.ok ? T.vOk : T.vBad);

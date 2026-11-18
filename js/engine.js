@@ -14,8 +14,10 @@
     var n = String(name).normalize('NFKC').replace(/[\p{Cf}\p{Cc}]/gu, '');
     return n.split(/\s+/).filter(Boolean).join(' ').toLowerCase();
   }
+  /* F6: a name made only of invisible characters (zero-width, bidi marks, joiners, variation selectors, blank fillers) counts as empty */
+  var INVISIBLE_ONLY = /^[\s\p{Cf}\p{Cc}\p{Zs}\p{Zl}\p{Zp}\u034F\u115F\u1160\u2800\u3164\uFFA0\uFE00-\uFE0F\u{E0100}-\u{E01EF}]*$/u;
   function cleanName(v, code) {
-    if (typeof v !== 'string' || !v.trim() || v.length > 100) throw EngineError(code);
+    if (typeof v !== 'string' || !v.trim() || INVISIBLE_ONLY.test(v) || v.length > 100) throw EngineError(code);
     return v.trim();
   }
   function reasonOf(v) {
@@ -36,7 +38,11 @@
     return s;
   }
 
-  function Run(doc, chain, operator, now) { this.doc = doc; this.chain = chain; this.operator = operator; this.now = now || function () { return new Date(); }; this.runId = chain.scope; }
+  function Run(doc, chain, operator, now) { this.doc = doc; this.chain = chain; this.operator = operator; this.now = now || function () { return new Date(); }; this.runId = chain.scope; this._tail = Promise.resolve(); }
+  /* One state-changing operation at a time per run: the second of two simultaneous complete() calls sees the advanced state and is refused (F4). */
+  Run.prototype._serial = function (fn) {
+    var p = this._tail.then(fn); this._tail = p.then(function () {}, function () {}); return p;
+  };
 
   async function startRun(doc, operator, opts) {
     opts = opts || {};
@@ -76,7 +82,8 @@
     return st;
   };
 
-  Run.prototype.complete = async function (step, a) {
+  Run.prototype.complete = function (step, a) { var self = this; return this._serial(function () { return self._complete(step, a); }); };
+  Run.prototype._complete = async function (step, a) {
     a = a || {};
     var st = await this._active(), cur = st.current;
     if (step !== cur.n) throw EngineError('not_current', 'step ' + step + ' is not the current step (current: ' + cur.n + ')');
@@ -110,7 +117,8 @@
     return { ok: true, status: 'in_progress' };
   };
 
-  Run.prototype.deviation = async function (step, reason) {
+  Run.prototype.deviation = function (step, reason) { var self = this; return this._serial(function () { return self._deviation(step, reason); }); };
+  Run.prototype._deviation = async function (step, reason) {
     var st = await this._active();
     reason = reasonOf(reason);
     if (step !== st.current.n) throw EngineError('not_current');
@@ -118,7 +126,8 @@
   };
 
   /* Q&A is logged with status, reason and cited steps only (not the free text), so a question cannot smuggle text into the report. */
-  Run.prototype.logQuestion = async function (q) {
+  Run.prototype.logQuestion = function (q) { var self = this; return this._serial(function () { return self._logQuestion(q); }); };
+  Run.prototype._logQuestion = async function (q) {
     return this.chain.append('question', this.operator, { status: q.status, reason: q.reason, steps: q.steps || [] }, this.now());
   };
 

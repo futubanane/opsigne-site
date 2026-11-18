@@ -10,7 +10,13 @@ const { createQA } = require('../js/qa.js');
 
 const REF = process.env.OPSIGNE_PY || path.resolve(__dirname, '../../opsigne');
 const doc = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/mop-ups-017.json'), 'utf8'));
-const red = JSON.parse(fs.readFileSync(path.join(REF, 'redteam/questions.json'), 'utf8')).questions;
+/* F8: questions come from the repo copy (test/fixtures/); OPSIGNE_PY overrides. The Python reference itself is outside the repo:
+   without it the two tests that compare against Python are SKIPPED with a message (the rest still runs). */
+const FIXTURE = path.join(__dirname, 'fixtures', 'redteam-questions.json');
+const refFile = process.env.OPSIGNE_PY && path.join(process.env.OPSIGNE_PY, 'redteam/questions.json');
+const red = JSON.parse(fs.readFileSync(refFile && fs.existsSync(refFile) ? refFile : FIXTURE, 'utf8')).questions;
+const HAVE_PY = fs.existsSync(path.join(REF, 'opsigne', 'qa.py')) && fs.existsSync(path.join(REF, 'data', 'mop-ups-017.json'));
+const NO_PY = HAVE_PY ? false : 'Python reference not found (set OPSIGNE_PY=<path of the opsigne project>); parity with Python not checked';
 const extra = JSON.parse(fs.readFileSync(path.join(__dirname, 'extra-questions.json'), 'utf8'));
 const corpus = red.concat(extra);
 const WANT = { answer: 'answer', refuse: 'refused', decline: 'declined' };
@@ -23,7 +29,7 @@ function python(questions) {
   if (r.status !== 0) throw new Error('python reference failed: ' + r.stderr);
   return JSON.parse(r.stdout);
 }
-const py = python(corpus);
+const py = HAVE_PY ? python(corpus) : null;
 const strict = createQA(doc, { lang: 'en', improve: false });
 const improved = createQA(doc, { lang: 'en', improve: true });
 
@@ -45,7 +51,7 @@ function summary(name, results, qs) {
   return { out, rows };
 }
 
-test('PARITY strict JS port vs Python on ' + corpus.length + ' questions: status, reason, steps, scores, answer text', () => {
+test('PARITY strict JS port vs Python on ' + corpus.length + ' questions: status, reason, steps, scores, answer text', { skip: NO_PY }, () => {
   const mism = [];
   corpus.forEach((q, i) => {
     const j = strict.ask(q.question), p = py[i];
@@ -65,7 +71,7 @@ test('PARITY strict JS port vs Python on ' + corpus.length + ' questions: status
   assert.deepEqual(mism, []);
 });
 
-test('RED-TEAM strict JS == Python numbers; improved JS: before/after report, 0 false answers', () => {
+test('RED-TEAM strict JS == Python numbers; improved JS: before/after report, 0 false answers', { skip: NO_PY }, () => {
   const qs = red;
   const pyRes = py.slice(0, red.length).map((p) => ({ status: p.status, citations: p.steps.map((s) => ({ step: s, procedure_id: 'MOP-UPS-017', version: '1.0' })) }));
   const before = summary('python (reference)', pyRes, qs);
@@ -102,4 +108,12 @@ test('KNOWN WEAKNESS: covered questions refused by the original logic', () => {
   });
   const named = rep.filter((x) => ['KW-01', 'KW-02', 'KW-03'].includes(x.id));
   named.forEach((x) => assert.equal(x.after.status, 'answer', x.q));
+});
+
+test('F8: in-repo red-team fixture is complete (77 questions, only id/category/question/expect/steps/split) and equals the reference copy when present', () => {
+  const raw = JSON.parse(fs.readFileSync(FIXTURE, 'utf8'));
+  assert.equal(raw.questions.length, 77);
+  for (const q of raw.questions) { assert.deepEqual(Object.keys(q).sort(), ['category', 'expect', 'id', 'question', 'split', 'steps']); assert.ok(['answer', 'refuse', 'decline'].includes(q.expect)); }
+  const ref = path.join(REF, 'redteam/questions.json');
+  if (HAVE_PY && fs.existsSync(ref)) assert.deepEqual(JSON.parse(fs.readFileSync(ref, 'utf8')), raw);
 });

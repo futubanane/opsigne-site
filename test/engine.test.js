@@ -157,3 +157,36 @@ test('report: JSON and HTML contain verification, head hash, readings; HTML esca
   assert.equal(bad.json.verification.ok, false); assert.match(bad.html, /ÉCHEC|NON VALIDE/);
   assert.match(bad.html, /Démo à données fictives/);
 });
+
+// F4: simultaneous calls can never record the same step twice or leave a sequence gap
+test('F4: three simultaneous complete() calls on the same step record it once; log stays valid', async () => {
+  const E = require('../js/engine.js'), doc = require('../data/mop-ups-017.json');
+  const run = await E.startRun(doc, 'A. Example');
+  const r = await Promise.allSettled([run.complete(1, {}), run.complete(1, {}), run.complete(1, {})]);
+  assert.strictEqual(r.filter((x) => x.status === 'fulfilled').length, 1);
+  assert.ok(r.filter((x) => x.status === 'rejected').every((x) => x.reason.code === 'not_current'));
+  assert.strictEqual(run.chain.events.length, 2);
+  const v = await run.chain.verify(); assert.ok(v.ok, v.error); assert.deepStrictEqual(run.chain.events.map((e) => e.seq), [1, 2]);
+});
+test('F4: concurrent raw chain appends get distinct, gap-free sequence numbers', async () => {
+  const C = require('../js/chain.js'); const c = new C.Chain('RUN-test');
+  await Promise.all([1, 2, 3, 4, 5].map((i) => c.append('question', 'x', { i }, new Date())));
+  assert.deepStrictEqual(c.events.map((e) => e.seq), [1, 2, 3, 4, 5]); assert.ok((await c.verify()).ok);
+});
+
+// F6: a name made only of invisible characters is rejected like an empty one (operator and second person), real names still pass
+const INVISIBLE_NAMES = ['\u200b', '\u200b\u200c\u200d', '\u2060\ufeff', '\u200e\u200f', '\u202a\u202b\u202c\u202d\u202e', '\u2066\u2067\u2068\u2069', ' \u200b \t\u00a0', '\u00ad', '\u034f', '\ufe0f', '\u2800', '\u3164', '\u115f\u1160', '\u2063\u2062', '\u{e0020}\u{e007f}', '\u0000\u0007', '\u180e'];
+test('F6: operator name of only invisible characters is rejected as operator_required', async () => {
+  for (const n of INVISIBLE_NAMES) await assert.rejects(() => E.startRun(doc, n), (e) => e.code === 'operator_required', JSON.stringify(n));
+});
+test('F6: second-person name of only invisible characters is rejected as verifier_required; visible names with joiners still work', async () => {
+  const run = await E.startRun(doc, 'A. Example\u200b');            // trailing zero-width after real letters is fine
+  assert.ok(run.chain.events.length === 1);
+  const ok = await E.startRun(doc, '\u{1F468}\u200d\u{1F469}\u200d\u{1F467}'); assert.ok(ok);
+  assert.ok(await E.startRun(doc, '\u200bX'));
+  const r = await E.startRun(doc, 'A. Example');
+  let st = await r.state();
+  while (st.current && !st.current.verify2) { const c = st.current; await r.complete(c.n, c.hold ? { reading: (c.reading.min + c.reading.max) / 2, ack: true } : { ack: true }); st = await r.state(); }
+  assert.ok(st.current && st.current.verify2, 'reached a second-person step');
+  await assert.rejects(() => r.complete(st.current.n, { ack: true, verifier: '\u200b\u200d' }), (e) => e.code === 'verifier_required');
+});

@@ -1,0 +1,110 @@
+[
+ {
+  "id": "FC-01",
+  "category": "in_scope_fr",
+  "question": "Avec quoi dois-je déplacer le module ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ]
+ },
+ {
+  "id": "FC-02",
+  "category": "in_scope_fr",
+  "question": "Comment mettre le module 3 hors service depuis le panneau ?",
+  "expect": "answer",
+  "steps": [
+   4
+  ]
+ },
+ {
+  "id": "FC-03",
+  "category": "in_scope_fr",
+  "question": "Comment revenir en arrière si la charge est trop élevée ?",
+  "expect": "answer",
+  "steps": [
+   13
+  ]
+ },
+ {
+  "id": "FC-04",
+  "category": "in_scope_fr",
+  "question": "Sur quelle source dois-je essayer le testeur de tension ?",
+  "expect": "answer",
+  "steps": [
+   6
+  ]
+ },
+ {
+  "id": "FC-05",
+  "category": "in_scope_fr",
+  "question": "Quel écart de charge est toléré à la clôture ?",
+  "expect": "answer",
+  "steps": [
+   12
+  ]
+ },
+ {
+  "id": "FC-06",
+  "category": "in_scope_fr",
+  "question": "Que regarder sur l’afficheur de l’onduleur au début ?",
+  "expect": "answer",
+  "steps": [
+   2
+  ]
+ },
+ {
+  "id": "FC-07",
+  "category": "in_scope_fr",
+  "question": "Combien de vis tiennent le module en place ?",
+  "expect": "answer",
+  "steps": [
+   7
+  ]
+ },
+ {
+  "id": "FC-08",
+  "category": "in_scope_fr",
+  "question": "Comment sait-on que le module est revenu en ligne ?",
+  "expect": "answer",
+  "steps": [
+   11
+  ]
+ },
+ {
+  "id": "FC-09",
+  "category": "in_scope_fr",
+  "question": "Quels risques y a-t-il en ouvrant l’armoire ?",
+  "expect": "answer",
+  "steps": [
+   3
+  ]
+ },
+ {
+  "id": "FC-10",
+  "category": "in_scope_fr",
+  "question": "Quelle valeur de tension prouve qu’il n’y a plus de courant ?",
+  "expect": "answer",
+  "steps": [
+   6
+  ]
+ },
+ {
+  "id": "FC-11",
+  "category": "in_scope_fr",
+  "question": "Quels gants dois-je mettre ?",
+  "expect": "answer",
+  "steps": [
+   3
+  ]
+ },
+ {
+  "id": "FC-12",
+  "category": "in_scope_fr",
+  "question": "Comment fixer le module de remplacement dans l’emplacement ?",
+  "expect": "answer",
+  "steps": [
+   9
+  ]
+ }
+]
